@@ -1,0 +1,182 @@
+												Web Accessibility
+**************************************************************************************************************************************************************
+How to design Web?
+
+HTML,CSS + JavaScript
+
+Design fundamentals:
+
+1.layout
+   fixed width (before 2007), responsive, grid, flex
+2.colors and themes
+3.fonts 
+4.images and videos
+
+IS there any specification for designing web?
+
+What is specification or spec?
+
+Set of rules and regulations followed
+
+Is there is any spec is available for web?
+Yes---WCAG  - Web content Accessibility Guideline
+************************************************************************************************************************************************************
+
+
+								“The power of the Web is in its universality.
+						Access by everyone regardless of disability is an essential aspect.”
+												By
+						Tim Berners-Lee, W3C Director and inventor of the World Wide Web
+
+
+Versions of WCAG:
+
+WCAG 2.0 - old version 
+  core accessibility principles - POUR
+WCAG 2.1 - new Version
+     Adds support for mobility, low vision, cognitive disability
+WCAG 2.2 - Latest version
+    Extends 2.1 with focus on cognitive, learning, fine motor disability 
+*********************************************************************************************************************************************************
+								   Accessibility Compliance
+*******************************************************************************************************************************************************
+The WCAG define three levels of compliance , to measure how accessible a website or digital content is
+
+
+Level                                                       Meaning                                           who benefits
+
+A                                                  Minimum Accessibility                               Essential for people with sever and normal disabilities 
+
+
+	                                            Recommended level                                Address major barriers for most users
+
+AAA                                            Advanced level accessibility                    Focus all types of disabilities , it is very hard to achieve 
+
+Educational 
+AAA -  w3c.org,gov.uk,bbc,university of Cambridge/ hard vard /MIT
+
+AA
+india.gov.in
+usa.gov
+apple
+Microsoft
+google
+LinkedIn
+salesforce
+************************************************************************************************************************************************************
+										Coding
+
+WCAG 2.1/2.2. Level A:
+
+Check list
+Basic HTML Design for Level -A Accessibility:
+...........................................................................
+
+create html project
+
+>mkdir myweb
+
+basic html template
+index.html
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heading</title>
+</head>
+<body>
+    
+</body>
+</html>
+					
+How to run?
+ we are going to install web server in vscode as plugin. - live server			 
+
+
+GuideLine 
+
+1.Should be meaning full.
+  Here title 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Accessibility Guide Line Training</title>
+</head>
+<body>
+    
+</body>
+</html>
+
+2.Use Semantic HTML Elements as much as possible
+
+Semantic Elements  = Elements with a meaning
+
+A semantic element clearly defines its meaning to both the browser and the developers and also users(disability Users)
+
+Semantic elements are used to design web layouts.
+
+1.header
+2.footer
+3.main
+4.nav
+5.section
+6.aside
+7.figcaption
+8.summary
+9.time
+10.figure
+12.mark
+13.article
+
+Other elements
+button
+img
+label
+form
+input
+
+Avoid Using div,span for layout purpose
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Accessibility GuideLine Training</title>
+</head>
+
+<body>
+    <header>
+        <h1>Welcome to Accessibility</h1>
+        <nav>
+            <a href="#home">Home</a>
+        </nav>
+    </header>
+    <main>
+        <section>
+            <h2>About Accessibility</h2>
+        </section>
+        <section>
+            <h2>About Disabilities</h2>
+        </section>
+    </main>
+    <footer>
+        <nav>
+            <a href="#contactus">Contact us</a>
+        </nav>
+    </footer>
+</body>
+
+</html>
+
+
+
+
+
+
