@@ -48,7 +48,7 @@ Level                                                       Meaning             
 A                                                  Minimum Accessibility                               Essential for people with sever and normal disabilities 
 
 
-	                                            Recommended level                                Address major barriers for most users
+AA	                                            Recommended level                                Address major barriers for most users
 
 AAA                                            Advanced level accessibility                    Focus all types of disabilities , it is very hard to achieve 
 
@@ -95,7 +95,7 @@ How to run?
  we are going to install web server in vscode as plugin. - live server			 
 
 
-GuideLine 
+Guide Line 
 
 1.Should be meaning full.
   Here title 
@@ -140,7 +140,7 @@ label
 form
 input
 
-Avoid Using div,span for layout purpose
+Avoid Using div, span for layout purpose
 
 <!DOCTYPE html>
 <html lang="en">
@@ -174,9 +174,111 @@ Avoid Using div,span for layout purpose
 </body>
 
 </html>
+***********************************************************************************************************************************************************
+											Big Picture of Web Accessibility
+									  Easy Checks - A First Review of Web Accessibility
 
 
+"Easy Checks – A First Review of Web Accessibility" is a practical guide developed by the W3C Web Accessibility Initiative (WAI) to help anyone (not just experts) quickly check the accessibility of a web page.
 
+🌐 What is "Easy Checks"?
+	It's a preliminary evaluation method that helps you identify basic accessibility barriers on web pages.
+      It doesn’t replace full accessibility audits, but it’s great for:
 
+1.Spot-checking websites
+2.Raising awareness about accessibility
+3.Getting quick wins before deeper evaluation
+
+✅ Key Accessibility Areas Covered in Easy Checks:
+
+1.Page Title
+2.Image text alternatives(alt text") (pictures, illustrations, charts etc)
+3.Text
+    Headings
+    Contrast ratio (color contrast)
+    Resize text
+4.Interaction
+     Keyboard access and visual focus
+     Forms, labels, and errors (including search fields)
+5. General
+      Moving ,flashing or blinking content
+      Multimedia (video,audio) alternatives
+      Basic Structure check - Semantic Elements 
+
+Page Title:
+..................
+
+Check:
+  1.Does every page have a clear, unique title?
+   Why: Helps screen reader users and improves navigation.
+Tips:
+   1.Always look at title when you design a page - You have to audit manually
+
+Image text alternatives:
+.......................................
+1.Text alternatives ("alt text") convey the purpose of an image, including pictures, illustrations, charts, etc.
+2.Text alternatives are used by people who do not see the image. (For example, people who are blind and use screen readers can hear the         alt text read out; and people who have turned off images to speed download or save bandwidth can see the alt text.)
+3.The text should be functional and provide an equivalent user experience, not necessarily describe the image. (For example, appropriate        text alternative for a search button  would be "search", not "magnifying glass".)
+4.You don't usually see the alt text on a web page, it is in the web page markup (like this:
+<img src="pointer_to_image.png" alt="here's where the alternative text goes">).
+Every image should include alt in the markup.
+5.If an image conveys information useful for interacting with or understanding the web page content, then it needs alternative text.
+6.If an image is just decorative and people don't need to know about the image, then it should have null alt (alt="").
+Automated tests can tell you if alt is missing. To determine if the alternative text is appropriate, you need to see the image and judge it in context.
+
+How to check / verify the web site or page images has alt attribute?
+
+There are various ways to check:
+
+1.Using browser dev tool called img  - browser specific
+    In the toolbar you can select "images" - if browser does not have this option
+2.To check alt text with any browser
+     WAVE - tool
+
+	WAVE® is a suite of evaluation tools that helps authors make their web content more accessible to individuals with disabilities.
+       WAVE can identify many accessibility and Web Content Accessibility Guideline (WCAG) errors, but also facilitates human evaluation of                     web content.
+How to use Wave?
+
+1.You can use wave directly
+     https://wave.webaim.org/
+2.You can install wave browser plugin
+
+Wave Summary Report:
+
+1.Errors
+2.Contrast Errors
+3.Alerts
+4.Features
+5.Structural Elements
+6.ARIA
+
+1.Errors:
+ 1.1. Issues that will impact certain users with disabilities
+ 1.2.Failures to meet WCAG
+
+Error Report:
+
+Errors
+   Missing alternative text
+
+What It Means
+	Image alternative text is not present.
+
+Why It Matters
+	Each image must have an alt attribute. Without alternative text, the content of an image will not be available to screen reader users or 	when the image is unavailable.
+
+How to Fix It
+	Add an alt attribute to the image. The attribute value should accurately and succinctly present the content and function of the image. If the content of the image is conveyed in the context or surroundings of the image, or if the image does not convey content or have a function, it should be given empty/null alternative text (alt="").
+
+The Algorithm... in English
+	An image does not have an alt attribute.
+Standards and Guidelines
+    1.1.1 Non-text Content (Level A)
+
+Task:
+  1.Create a sample web page , having some images, test without alt attribute and add alt attribute and also test
+    Using wave 
+eg:
+   <img src="banner.jpg">
 
 
