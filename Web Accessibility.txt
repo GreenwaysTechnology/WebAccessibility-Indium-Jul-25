@@ -252,6 +252,7 @@ Wave Summary Report:
 5.Structural Elements
 6.ARIA
 
+************************************************************************************************************************************************************
 1.Errors:
  1.1. Issues that will impact certain users with disabilities
  1.2.Failures to meet WCAG
@@ -280,5 +281,112 @@ Task:
     Using wave 
 eg:
    <img src="banner.jpg">
+************************************************************************************************************************************************************
+										Contrast Errors
+									      (Very low contrast)
+************************************************************************************************************************************************************
+1.Text that does not meet WCAG contrast requirements
 
+What It Means:
+	Very low contrast between text and background colors.
 
+Why It Matters
+         Adequate contrast of text is necessary for all users, especially users with low vision.
+
+How to Fix It
+	Increase the contrast between the foreground (text) color and the background color.
+        Large text (larger than 18 point or 14 point bold) does not require as much contrast as smaller text.
+
+The Algorithm:
+
+	   Text is present that has a contrast ratio less than 4.5:1, or large text (larger than 18 point or 14 point bold) has a contrast ratio less than 3:1.
+		 WCAG requires that page elements have both foreground AND background colors defined (or inherited) that provide sufficient contrast. When text is presented over a background image, the text must have a background color defined (typically in CSS) that provides adequate text contrast when the background image is disabled or unavailable. 
+
+		WAVE does not identify contrast issues in text with CSS transparency, gradients, or filters.
+                WCAG Level AAA requires a contrast ratio of at least 7:1 for normal text and 4.5:1 for large text.
+
+How to give right contrast colors to elements?
+  Will discuss later
+************************************************************************************************************************************************************
+												3.Alerts
+************************************************************************************************************************************************************  1.That may cause accessibility issues
+2. A Evaluator must decide the impact
+
+Report:
+
+1.Redundant alternative text
+   
+  " The alternative text for an image is the same as nearby or adjacent text."
+
+<div class="a-section a-spacing-none _fluid-quad-image-label-v2_style_fluidImageContainer__2SOMr">
+<img alt="Refrigerators that is sold" src="https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/Appliances-QC-PC-186x116--B08345R1ZW._SY116_CB667322346_.jpg" class="_fluid-quad-image-label-v2_style_fluidLandscapeImage__2euAK _fluid-quad-image-label-v2_style_fluidImage__gTBjA" data-a-hires="https://images-eu.ssl-images-amazon.com/images/G/31/IMG15/Irfan/GATEWAY/MSO/B08345R1ZW---372x232._SY232_CB667322346_.jpg">
+
+</div>
+
+<div class="a-section a-spacing-none _fluid-quad-image-label-v2_style_imageLabel__3ANSV aok-inline-block aok-align-center">
+<span class="a-size-small a-color-base truncate-2line">
+        Refrigerators 
+</span></div>
+
+2.A nearby image has the same alternative text
+
+<img alt="BHAAKUR Cotton Jhabla Set for Infants and Toddlers | Snap Buttons Jabla |Soft Mulmul |Breathable and Comfortable | Top..." src="https://m.media-amazon.com/images/I/51mInU4fLEL._AC_SY200_.jpg" class="product-image" height="200px" data-a-hires="https://m.media-amazon.com/images/I/51mInU4fLEL._AC_SY400_.jpg">
+
+3.Long alternative text
+   <img alt="Napoleon Travel Q 285 Portable Gas Grill – 2-Burner LPG BBQ Cast Iron Cooking Grates, JETFIRE Ignition, Folding Legs &amp;..." src="https://m.media-amazon.com/images/I/51JG2awjdfL._AC_SY200_.jpg" class="product-image" height="200px" data-a-hires="https://m.media-amazon.com/images/I/51JG2awjdfL._AC_SY400_.jpg">
+
+4.Orphaned form label
+
+Not Good
+<label id="captions-foreground-color-vjs_video_3_component_777" class="vjs-label">
+       Color
+</label>
+
+Good:
+<form>	
+<label id="captions-foreground-color-vjs_video_3_component_777" class="vjs-label">
+       Color
+</label>
+	<input type="text" id="captions-foreground-color-vjs_video_3_component_777">
+</form>
+
+5.Unlabeled form control with title
+
+What It Means
+A form control does not have a label, but has a title.
+
+Why It Matters
+	The title attribute value for unlabeled form controls will be presented to screen reader users. 
+	However, a properly associated text label provides better usability and accessibility and should be used unless the purpose of the form control is intuitive without the label.
+
+How to Fix It
+If a visible text label is available for the form control, associate the text label to the form control using the label element. 
+This provides additional functionality for end users because if the label is clicked it will set focus to the form control. If the form control is intuitive without a <label>, the title attribute value may be used.
+Note that the title attribute value will not generally be read by a screen reader if the control has a label and may not be available to sighted users, particularly keyboard-only users.
+
+Standards and Guidelines
+...............................................
+    1.1.1 Non-text Content (Level A)
+    1.3.1 Info and Relationships (Level A)
+    2.4.6 Headings and Labels (Level AA)
+    3.3.2 Labels or Instructions (Level A)
+****************
+6. Missing first level heading
+
+What It Means
+	A page does not have a first level heading.
+
+Why It Matters
+	Headings facilitate page navigation for users of many assistive technologies. 
+	They also provide semantic and visual meaning and structure to the document. 
+        A first level heading (<h1>) should be present on nearly all pages. 
+        It should contain the most important heading on the page (generally the document title).
+
+How to Fix It
+       If the page presents a main heading, place it within an <h1> element. Add other sub-headings as necessary.
+
+Standards and Guidelines
+
+    1.3.1 Info and Relationships (Level A)
+    2.4.6 Headings and Labels (Level AA)
+***********************************************************************************************************************************************************
