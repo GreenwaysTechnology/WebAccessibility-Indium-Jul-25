@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Navigation</title>
+    <style>
+        button,
+        a,
+        input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 tabindex="0"> Keyboard Navigation Demo</h1>
+    </header>
+    <!-- links -->
+    <main>
+        <a href="#section2" >Go to Section 2</a>
+        <button>Click</button>
+        <input type="text" placeholder="Try something">
+        <section id="section2" tabindex="0">
+            <h2 tabindex="0">Section 2</h2>
+            <p tabindex="0">This is something</p>
+            <p>This is not focused</p>
+        </section>
+    </main>
+</body>
+
+</html>

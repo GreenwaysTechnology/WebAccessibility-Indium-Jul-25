@@ -631,3 +631,194 @@ Solution:
         <h4>Header-4</h4>
         <h5>Header-5</h5>
     </main>
+************************************************************************************************************************************************************
+*********************************************************************************************************************************************************
+										Resize  Text
+************************************************************************************************************************************************************
+Some people need to enlarge web content in order to read it. Some need to change other aspects of text display: font, space between lines, and more.
+
+Most browsers allow users to change text size through:
+
+    text size settings (usually through Options or Preferences)
+    text-only zoom
+    page zoom (which also zooms images, buttons, etc.)
+
+When pages are not designed properly, they can be unusable when the text size is changed, especially when it is changed through text-only zoom or text settings. Sometimes columns and sections overlap, the space between lines disappears, lines of text become too long, or text disappears.
+
+
+What to do:
+    Increase the text size.
+
+What to check for:
+    All text gets larger. (A common problem is that text is not provided as actual text format but instead the text is in an image. Text in images does not get larger when users increase text size.)
+    Text doesn't disappear or get cut off.
+    Text, images, and other content do not overlap.
+    All buttons, form fields, and other controls are visible and usable.
+    Horizontal scrolling is not required to read sentences or "blocks of text". It is best practice that when text size is increased, all the text in a sentence is visible. It is acceptable to have to scroll horizontally to get to different sections of a page. (For top-to-bottom languages, change "horizontal scrolling" to "vertical scrolling".)
+
+Resize text checks
+
+The instructions below are for text-only zoom. You can also change the text size settings, for example, through Tools > Options or Preferences. To keep this simple, we don't include instructions for changing those settings. We also don't include instructions for page zoom because it does not usually reveal the accessibility barriers described above.
+
+
+To check text-only zoom in Firefox
+
+    Set zoom to text only.
+        From the menubar, select View > Zoom > Zoom Text Only.
+        Or, with the keyboard: Alt+V, Z, T
+    Increase zoom to 200%.
+        To incrementally increase zoom with the keyboard:
+            Windows, press Ctrl+[+] (hold down the control key and press the + key at the same time).
+            On Mac, press command+[+] (hold down the command key and the + key at the same time).
+        Usually 4-6 key presses gets to 200%.
+        To check or set the zoom percent from the menu option:
+            Click the menu button.
+            Firefox customization menu zoom percent settings.
+            In the customization menu, click the + button to zoom larger. The number before the + button is the current zoom percent.
+
+**********************************************************************************************************************************************************
+										Interaction
+**********************************************************************************************************************************************************
+How people interact with web
+
+1.Keyboard access and visual focus
+2.Forms,labels, and errors(including search fields)
+
+
+Keyboard access and visual focus:
+...........................................................
+
+1.Many people cannot use a mouse and rely on the keyboard to interact with the Web. 
+2.People who are blind and some sighted people with mobility impairments rely on the keyboard or on assistive technologies and strategies that rely on keyboard commands, such as voice input. 
+3.Accessible websites enable people to access all content and functionality — links, forms, media controls, etc. — through a keyboard.
+4.Keyboard focus should be visible and should follow a logical order through the page elements
+5.. Visible keyboard focus could be a border or highlight, as shown below, that moves as you tab through the web page.
+	
+       Menu
+		
+			---------
+			Home
+		        -----------
+			Services
+			Customers
+
+What to do:
+
+In a browser that supports keyboard navigation with the Tab key (for example, Firefox, IE, Chrome, and Safari; not Opera):
+
+    In Mac browsers, enable keyboard navigation to all controls.
+        In newer browsers: Select System Preferences > Keyboard > Shortcuts. Select the "All controls" option button.
+        In older browsers: Select System Preferences > Keyboard > Keyboard Shortcuts. In the "Full Keyboard Access" section, check "All Controls".
+    (In Windows browsers, you don't need to do this step.)
+    Click in the address bar, then put your mouse aside and do not use it.
+    Press the 'Tab' key to move through the elements on the page. You can press 'Shift-Tab' to go backwards.
+    To move within elements such as drop-down lists and menu bars, press the arrow keys.
+    To select a specific item within a drop-down list:
+        Tab to the list box,
+        use the arrow keys to move the focus to items,
+        when an item has focus, press the Enter key or Space bar to select that item.
+
+
+What to check for:
+
+    Tab to all: Check that you can tab to all the elements, including links, form fields, buttons, and media player controls. (A common problem is that you cannot tab to media player controls.)
+
+    Tab away: Check that you can tab away from all elements that you can tab into. (A common problem is the keyboard focus gets caught in media controls and you cannot get out; it's called the "keyboard trap".)
+
+    Tab order: Check that the tab order follows the logical reading order (e.g., for left-to-right languages: top to bottom, left to right) in sequence.
+
+    Visual focus: Check that the focus is clearly visible as you tab through the elements, that is, you can tell which element has focus, e.g., links have a gray outline around them or are highlighted.
+
+    All functionality by keyboard: Check that you can do everything with the keyboard; that is, you don't need the mouse to activate actions, options, visible changes, and other functionality. (A common problem is that some functionality is available only with mouse hover, and is not available with keyboard focus.)
+
+    Drop-down lists: Check that after you tab into a drop-down list, you can use the arrow keys to move through all the options without triggering an action. (A common problem for drop-downs used for navigation is that as soon as you arrow down, it automatically selects the first item in the list and goes to a new page — you cannot get to other items in the list.)
+
+    Image links: Check that when images are links, they have clear visual focus and can be activated using the keyboard (usually by pressing the Enter key).
+
+
+Key                                                   Function
+tab                                                    move forward through focusable elements
+Shift+tab						 move backward
+Enter/space                                     Activate links buttons form controls
+Arrow keys					 Navigate inside controls like menu, sliders, select
+Esc                                                   Close modal or menus
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Navigation</title>
+    <style>
+        button,
+        a,
+        input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 tabindex="0"> Keyboard Navigation Demo</h1>
+    </header>
+    <!-- links -->
+    <main>
+        <a href="#section2">Go to Section 2</a>
+        <button>Click</button>
+        <input type="text" placeholder="Try something">
+        <section id="section2">
+            <h2>Section 2</h2>
+            <p>This is something</p>
+        </section>
+    </main>
+</body>
+
+</html>
+
+tab index:
+   The tab index attribute controls the keyboard navigation order of elements. It ensures that users can navigate your web page using only the keyboard - using tab keyboard.
+
+tabindex = 0        Adds the element to the natural tab order (after native elements)
+tabindex= 1         Makes the element focusable only by js (.focus()) method , not by the tab keyword
+tabindex =-1      set custom tab order , but should be avoided
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Navigation</title>
+    <style>
+        button,
+        a,
+        input {
+            margin: 10px;
+            padding: 10px;
+            font-size: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1 tabindex="0"> Keyboard Navigation Demo</h1>
+    </header>
+    <!-- links -->
+    <main>
+        <a href="#section2" >Go to Section 2</a>
+        <button>Click</button>
+        <input type="text" placeholder="Try something">
+        <section id="section2" tabindex="0">
+            <h2 tabindex="0">Section 2</h2>
+            <p tabindex="0">This is something</p>
+            <p>This is not focused</p>
+        </section>
+    </main>
+</body>
+
+</html>
