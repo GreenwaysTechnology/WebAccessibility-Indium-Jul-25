@@ -347,7 +347,7 @@ Good:
 <label id="captions-foreground-color-vjs_video_3_component_777" class="vjs-label">
        Color
 </label>
-	<input type="text" id="captions-foreground-color-vjs_video_3_component_777">
+	<input type="text" for="captions-foreground-color-vjs_video_3_component_777">
 </form>
 
 5.Unlabeled form control with title
@@ -389,4 +389,245 @@ Standards and Guidelines
 
     1.3.1 Info and Relationships (Level A)
     2.4.6 Headings and Labels (Level AA)
+
+Skipped heading level:
+
+What It Means
+      A heading level is skipped.
+
+Why It Matters
+       Headings provide document structure and facilitate keyboard navigation by users of assistive technology. 
+       These users may be confused or experience difficulty navigating when heading levels are skipped.
+
+How to Fix It
+        Restructure the document headings to ensure that heading levels are not skipped.
+
+Standards and Guidelines
+    1.3.1 Info and Relationships (Level A)
+    2.4.1 Bypass Blocks (Level A)
+    2.4.6 Headings and Labels (Level AA)
+
+Noscript element:
+
+What It Means
+       A <noscript> element is present.
+Why It Matters
+          Content within <noscript> is presented if JavaScript is disabled. Because nearly all users (including users of screen readers and other assistive technologies) have JavaScript enabled, <noscript> cannot be used to provide an accessible version of inaccessible scripted content.
+
+How to Fix It
+            Ensure that scripted content is accessible. The <noscript> content will be presented to very few users, but must be accessible if used.
+
+Device dependent event handler:
+
+What It Means
+     An event handler is present that may not be accessible.
+
+Why It Matters
+         The JavaScript events in use do not appear to be accessible to both mouse and keyboard users. 
+          To be fully accessible, critical JavaScript interaction should be device independent.
+
+How to Fix It
+        Ensure that critical functionality and content is accessible by using a device independent event handler (which responds to both keyboard and mouse) or by using both a mouse dependent and a keyboard dependent event handler.
+
+Very small text
+
+What It Means
+      Text is very small.
+Why It Matters
+       Text which is very small is difficult to read, particularly for those with low vision.
+How to Fix It
+            Increase the text to a more readable size.
+
+Redundant title text:
+
+What It Means
+	Title attribute text is the same as text or alternative text.
+
+Why It Matters
+	The title attribute value is used to provide advisory information. It typically appears when the users hovers the mouse over an element. The advisory information presented should not be identical to or very similar to the element text or alternative text.
+
+How to Fix It
+	In most cases the title attribute can be removed, otherwise modify it to provide advisory, but not redundant information. Note that the title text may or may not be read by a screen reader and is typically inaccessible to sighted keyboard users. 
+
+Layout table:
+What It Means
+   A layout table is present.
+Why It Matters
+      Layout tables exist merely to position content visually - to create columns, insert spacing, or align content neatly for sighted users. Their content is not at all tabular in nature. Layout tables should not be used in HTML5. They can introduce reading and navigation order issues. Screen readers may interpret them as data tables (i.e., announcing column and row numbers), especially if they contain table header (<th>) cells. This introduces significant overhead on screen reader users.
+
+How to Fix It
+      In almost every case, layout tables can be replaced with other HTML elements and styled with CSS to achieve the desired visual presentation. If the table contains tabular data, provide appropriate header (<th>) cells. If the layout table remains, verify that the reading and navigation order of table content (based on underlying source code order) is logical and give it role="presentation" to ensure it is not identified as a table to screen reader users.
 ***********************************************************************************************************************************************************
+										   Features
+************************************************************************************************************************************************************
+Elements that improve accessibility when implemented correctly.
+
+1.Null or empty alternative text:
+
+What It Means
+              Alternative text is null or empty (alt="").
+
+Why It Matters
+                If an image does not convey content or if the content of the image is conveyed elsewhere (such as in a caption or nearby text), the image should have empty/null alternative text (alt="") to ensure that it is ignored by a screen reader and is hidden when images are disabled or unavailable.
+
+How to Fix It
+         Ensure that the image does not convey content or that the content of the image is conveyed in nearby text (e.g., a caption).
+
+2.Linked image with alternative text
+
+What It Means
+	Alternative text is present for an image that is within a link.
+Why It Matters
+		Including appropriate alternative text on an image within a link ensures that the function and purpose of the link and the content of the image is available to screen reader users or when images are unavailable.
+
+How to Fix It
+		Ensure that the alternative text presents the content of the image and/or the function of the link. If the full content and function of the link is presented in text within the link (an image and a text caption both within the same link, for example), then the image should generally be given empty/null alternative text (alt="") to avoid redundancy.
+
+3.Form label
+
+What It Means
+	A form label is present and associated with a form control.
+Why It Matters
+	A properly associated form label is presented to a screen reader user when the form control is accessed. Additionally, a label can be clicked with the mouse to set focus to the form control.
+
+How to Fix It
+	Ensure that the label is accurate, descriptive, succinct, and that it is associated with the correct form control element.
+
+4.Fieldset
+
+What It Means
+	A fieldset is present.
+Why It Matters
+	A fieldset provides a visual and structural grouping of related form elements. If present, a fieldset legend presents a description of the grouped form elements to screen reader users. A fieldset and legend are typically necessary for groups of check boxes or radio buttons.
+
+How to Fix It
+	Ensure that the fieldset encloses the proper form elements. Most fieldsets should have an accurate, descriptive, and succinct legend. Note that the legend is repeated to screen reader users for each form control within the fieldsets.
+
+5.Language
+
+What It Means
+	The language of the document or a page element is identified.
+Why It Matters
+	Identifying the language of the page or portion of page (if different from the page itself) allows screen readers to read the content appropriately.
+
+How to Fix It
+	Ensure the language is properly identified for the page (e.g., <html lang="en">). If content within the page is in a language different than the page's language, identify it using a valid lang attribute value (e.g., <p lang="fr">).
+**********************************************************************************************************************************************************
+												Structural Elements
+**********************************************************************************************************************************************************1  1.Shows Pages HTML and ARIA Regions
+2. identifies hidden elements
+3. Lists regions and headings in order
+4. indicates nesting of any page elements
+
+Headings:
+...........
+   Web pages often have sections of information separated by visual headings, for example, heading text is bigger and bold.
+ 
+    To make these work for everyone, the headings need to be marked up.
+    That way people can navigate to the headings — including people who cannot use a mouse and use only the keyboard, and people who                 	use a screen reader.
+
+Heading levels should have a meaningful hierarchy, e.g.:
+
+    Heading Level 1 <h1>
+        Heading Level 2 <h2>
+            Heading Level 3 <h3>
+            Heading Level 3 <h3>
+        Heading Level 2 <h2>
+            Heading Level 3 <h3>
+                Heading Level 4 <h4>
+                Heading Level 4 <h4>
+        Heading Level 2 <h2>
+
+Heading level 2:
+
+What It Means
+	A second level heading (<h2> element) is present.
+Why It Matters
+	Headings facilitate page navigation for users of assistive technologies. They also provide semantic and visual meaning and structure to the document.
+
+How to Fix It
+	Ensure that the text in question is truly a heading and that it is structured correctly in the page outline.
+
+What to check for:
+
+   1.The page has a heading. In almost all pages there should be at least one heading.
+    2.All text that looks like a heading is marked up as a heading.
+   3. All text that is marked up as a heading is really a conceptual section heading.
+    4.The heading hierarchy is meaningful. Ideally the page starts with an "h1" — which is usually similar to the page title — and does not skip                                                                                 levels; however, these are not absolute requirements.
+
+How to test proper heading flow?
+
+Wave tool - This tells that we have used headings  under structural elements
+
+W3C HTML validator - tool
+
+https://validator.w3.org/nu/#file
+
+Source:
+<!DOCTYPE html>↩
+<html lang="en">↩
+↩
+<head>↩
+    <meta charset="UTF-8">↩
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">↩
+    <title>Headings Test</title>↩
+</head>↩
+↩
+<body>↩
+    <!-- <div>↩
+        <h1>Header-1</h1>↩
+        <h2>Header-2</h2>↩
+        <h3>Header-3</h3>↩
+        <h4>Header-4</h4>↩
+        <h5>Header-5</h5>↩
+↩
+    </div> -->↩
+    <div>↩
+        <h3>Header-3</h3>↩
+        <h5>Header-5</h5>↩
+        <h1>Header-1</h1>↩
+        <h2>Header-2</h2>↩
+        <h4>Header-4</h4>↩
+↩
+    </div>↩
+</body>↩
+↩
+</html>
+
+Outline
+The output as per code:
+
+<h1> [missing]
+<h2> [missing]
+<h3> Header-3
+<h4> [missing]
+<h5> Header-5
+
+Recommended output
+
+<h1> Header-1
+	<h2> Header-2	
+	<h3> [missing]
+	<h4> Header-4
+
+Wave Test Tool Result:
+.......................................
+Alerts:
+
+Skipped heading level:
+What It Means
+	A heading level is skipped.
+Why It Matters
+	Headings provide document structure and facilitate keyboard navigation by users of assistive technology. These users may be confused or experience difficulty navigating when heading levels are skipped.
+
+How to Fix It
+	Restructure the document headings to ensure that heading levels are not skipped.
+
+Solution:
+    <main>
+        <h1>Header-1</h1>
+        <h2>Header-2</h2>
+        <h3>Header-3</h3>
+        <h4>Header-4</h4>
+        <h5>Header-5</h5>
+    </main>
