@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div role="banner" tabindex="0">
+        <h1>Heading</h1>
+    </div>
+    <div role="navigation">
+        <ul>
+            <li>
+                <a href="#home">Home</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+    <div role="main">
+        <img src="play-button.png" 
+        role="button" 
+        tabindex="0"
+        onclick="alert('img button is clicked')"
+        onkeydown="if(event.key==='Enter' || event.key===' ')this.click();"
+        alt="Play button">
+    </div>
+</body>
+
+</html>

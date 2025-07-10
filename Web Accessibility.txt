@@ -631,7 +631,6 @@ Solution:
         <h4>Header-4</h4>
         <h5>Header-5</h5>
     </main>
-************************************************************************************************************************************************************
 *********************************************************************************************************************************************************
 										Resize  Text
 ************************************************************************************************************************************************************
@@ -819,6 +818,518 @@ tabindex =-1      set custom tab order , but should be avoided
             <p>This is not focused</p>
         </section>
     </main>
+</body>
+
+</html>
+***********************************************************************************************************************************************************
+											ARIA 
+								 (Accessible Rich Internet Applications)
+
+
+WAI-ARIA (Web Accessibility Initiative – Accessible Rich Internet Applications) is a specification developed by the W3C (World Wide Web Consortium) to improve the accessibility of web content,, especially dynamic content and advanced user interface controls developed with JavaScript, HTML, and related technologies.
+
+Accessible Rich Internet Applications (ARIA) is a set of  "roles and attributes" that define ways to make web content and web applications (especially those developed with JavaScript) more accessible to people with disabilities.
+
+ARIA supplements HTML so that interactions and widgets commonly used in applications can be passed to assistive technologies when there is not otherwise a mechanism. For example, ARIA enables accessible JavaScript widgets, form hints and error messages, live content updates, and more.
+
+For eg:
+  if you develop custom elements in html, if you want to convert that custom element as web accessible  , ARIA helps
+
+Custom Elements:
+................................
+
+Two types of elements in html:
+
+1.built in html elements
+  eg : div,span,p,h1,img,header,footer,aside etc....
+ all built in elements are understood by browser because it is part of html language.
+2.custom elements
+  custom elements are elements which are developed by developer based on existing elements.
+ HTML 5 spec introduced a new feature that extend the functionality of existing html elements and you can add new attributes on existing html elements
+<app-drawer></app-drawer>
+
+Why WAI-ARIA?
+Modern web apps use dynamic content and custom widgets (e.g., sliders, tabs, modals) that don't have built-in accessibility. 
+
+WAI-ARIA:
+	Enhances the semantics of web elements.
+	Enables better keyboard navigation.
+	Makes custom widgets accessible.
+	Helps users with disabilities navigate and interact with the web.
+***********************************************************************************************************************************************************
+										Before using ARIA
+***********************************************************************************************************************************************************
+Warning:
+      Many of these widgets are fully supported in modern browsers. Developers should prefer using the correct semantic HTML element over using ARIA, if such an element exists.
+  For instance, native elements have built-in keyboard accessibility, roles and states. 
+  However, if you choose to use ARIA, you are responsible for mimicking the equivalent browser behavior in script.
+
+Rules ARIA use:
+...........................
+
+ First Rule of ARIA Use:
+
+	If you can use a native HTML element [HTML] or attribute with the semantics and behavior you require already built in, instead of re-purposing an element and adding an ARIA role, state or property to make it accessible, then do so.
+<header> - semantic HTML element
+<div> -  need to be converted as header - dont do this, use header itself
+
+Under what circumstances may this not be possible?
+
+	If the feature is available in HTML [HTML] but it is not implemented or it is implemented, but accessibility support is not.
+If the visual design constraints rule out the use of a particular native element, because the element cannot be styled as required.
+If the feature is not currently available in HTML.
+
+Second Rule of ARIA Use:
+
+Do not change native semantics, unless you really have to.
+For example: Developer wants to build a heading that's a tab.
+
+Do not do this:
+<h2 role=tab>heading tab</h2>
+Do this:
+<div role=tab><h2>heading tab</h2></div>
+
+Third Rule of ARIA Use:
+
+All interactive ARIA controls must be usable with the keyboard.
+If you create a widget that a user can click or tap or drag or drop or slide or scroll, a user must also be able to navigate to the widget and perform an equivalent action using the keyboard.
+
+All interactive widgets must be scripted to respond to standard keystrokes or keystroke combinations where applicable.
+
+For example, if using role=button the element must be able to receive focus and a user must be able to activate the action associated with the element using both the enter (on WIN OS) or return (MAC OS) and the space key.
+
+Fourth Rule of ARIA Use
+
+Do not use role="presentation" or aria-hidden="true" on a focusable element .
+Using either of these on a focusable element will result in some users focusing on 'nothing'.
+
+Do not do this:
+<button role=presentation>press me</button>
+
+Do not do this:
+<button aria-hidden="true">press me</button>
+
+Note
+Applying aria-hidden to a parent/ancestor of a visible interactive element will also result in the interactive element being hidden, so don't do this either:
+
+<div aria-hidden="true">
+<button>press me</button>
+</div>
+
+Note
+If an interactive element cannot be seen or interacted with, then you can apply aria-hidden, as long as it's not focusable. For example:
+button {opacity:0}
+
+<button tabindex="-1" aria-hidden="true">press me</button>
+Note
+If an interactive element is hidden using display:none or visibility:hidden (either on the element itself, or any of the element's ancestors), it won't be focusable, and it will also be removed from the accessibility tree. This makes the addition of aria-hidden="true" or explicitly setting tabindex="-1" unnecessary.
+
+Fifth Rule of ARIA Use:
+
+All interactive elements must have an accessible name.
+An interactive element only has an accessible name when its Accessibility API accessible name (or equivalent) property has a value.
+
+For example, the input type=text in the code example below has a visible label 'user name' , but no accessible name:
+
+
+    user name <input type="text">
+
+    or
+
+    <span>user name</span> <input type="text">
+    
+The control's MSAA accName property is empty:
+
+In comparison, the input type=text in the code example below has a visible label 'user name' and an accessible name. This example has an accessible name because the input element is a labelable element and the label element is used correctly to associate the label text with the input.
+
+<!-- Note: use of for/id or wrapping label around text
+and control methods will result in an accessible name -->
+
+<input type="text" aria-label="User Name">
+
+or
+
+<span id="p1">user name</span> <input type="text" aria-labelledby="p1">
+************************************************************************************************************************************************************
+										WAI-ARIA Key Concepts
+Concept		Description
+
+Roles		Describe the purpose of an element (e.g., button, dialog, navigation).
+States		Indicate current conditions (e.g., aria-checked, aria-expanded).
+Properties	Provide additional info (e.g., aria-labelledby, aria-describedby).
+
+
+The above are just "html" attributes only
+
+Types of HTML attributes
+1.In built attribute
+2.custom attributes
+
+In built attribute:
+
+ <img  src="logo.png" alt="company logo">
+
+img - element
+src,alt - attribute - built in
+  
+all built in properties logic already written inside browser(c program)
+
+ <div  id="id" class="banner"  message="hello">
+
+ message = attribute - custom attribute
+
+How to write logic of message?
+ HTML 5 Spec introduced to write logic through java script.
+
+roles , states and properties  were introduced by w3c as part of custom attributes theory into HTML 5
+   These attributes will help to improve web accessibility to next level.
+
+role:
+      Describe the purpose of an element 
+
+<div role="nameoftherole">
+🛠️ Common ARIA Roles
+
+| Role                         | Purpose                |
+| ---------------------------- | ---------------------- |
+| `button`                     | Interactive button     |
+| `dialog`                     | Dialog or modal window |
+| `navigation`                 | Navigation landmark    |
+| `tablist`, `tab`, `tabpanel` | Tabbed interfaces      |
+| `alert`                          | Alert message          |
+
+Complete list of ARIA roles:
+Abstract Roles (For reference only — not used directly in HTML)
+
+| Role          | Description                                                    |
+| ------------- | -------------------------------------------------------------- |
+| `command`     | Base for roles that initiate actions (`button`, `link`, etc.)  |
+| `composite`   | Base for widgets with child elements that act as a single unit |
+| `input`       | Base for user input elements                                   |
+| `landmark`    | Base for defining content sections                             |
+| `range`       | Base for roles with a value in a range (e.g., sliders)         |
+| `roletype`    | Base role from which all others inherit                        |
+| `section`     | Base for document structure                                    |
+| `sectionhead` | Heading roles base                                             |
+| `select`      | Base for selectable groups                                     |
+| `structure`   | Base for document structure and relationships                  |
+| `widget`      | Base for interactive UI                                        |
+| `window`      | Base for elements with their own window context                |
+
+ 2. Landmark Roles (Help screen reader users navigate)
+
+| Role            | Description                           |
+| --------------- | ------------------------------------- |
+| `banner`        | Site-wide heading (top of page)       |
+| `complementary` | Supports the main content             |
+| `contentinfo`   | Footer or metadata                    |
+| `form`          | Group of form elements                |
+| `main`          | Primary content area                  |
+| `navigation`    | Site or section navigation            |
+| `region`        | Significant content area with a label |
+| `search`        | Search feature section                |
+
+3. Structure Roles
+| Role                    | Description                                    |
+| ----------------------- | ---------------------------------------------- |
+| `article`               | Standalone content like a blog post            |
+| `column header`          | Header of a column in a grid or table          |
+| `definition`            | Term definition                                |
+| `directory`             | List of items with a hierarchical relationship |
+| `document`              | Static document content                        |
+| `grid`                  | Interactive table/grid                         |
+| `gridcell`              | Cell in a grid                                 |
+| `group`                 | Group of related items                         |
+| `heading`               | Section heading                                |
+| `img`                   | Image with a meaningful role                   |
+| `list`                  | Group of list items                            |
+| `listitem`              | Item in a list                                 |
+| `math`                  | Mathematical expression                        |
+| `none` / `presentation` | Ignores element in accessibility tree          |
+| `note`                  | Supplemental content                           |
+| `row`                   | Row in a table or grid                         |
+| `rowgroup`              | Group of rows                                  |
+| `rowheader`             | Row heading                                    |
+| `separator`             | Visual or logical divider                      |
+| `table`                 | Tabular data                                   |
+| `term`                  | Term in a glossary                             |
+| `tooltip`               | Help text that appears on hover/focus          |
+
+Widget Roles (Interactive elements that users operate)
+
+| Role               | Description                            |
+| ------------------ | -------------------------------------- |
+| `button`           | Clickable button                       |
+| `checkbox`         | Checkbox input                         |
+| `combobox`         | Editable dropdown with suggestions     |
+| `dialog`           | Modal or popup window                  |
+| `gridcell`         | Editable or interactive table cell     |
+| `link`             | Hyperlink                              |
+| `listbox`          | List of selectable items               |
+| `menu`             | Menu of commands                       |
+| `menuitem`         | Item inside a menu                     |
+| `menuitemcheckbox` | Checkbox-style menu item               |
+| `menuitemradio`    | Radio-style menu item                  |
+| `option`           | Option in a listbox                    |
+| `progressbar`      | Displays progress of an operation      |
+| `radio`            | Radio button                           |
+| `radiogroup`       | Group of radio buttons                 |
+| `scrollbar`        | Scroll control                         |
+| `searchbox`        | Search input field                     |
+| `slider`           | Range input control                    |
+| `spinbutton`       | Numeric input with increment/decrement |
+| `switch`           | On/off switch                          |
+| `tab`              | Selectable tab in a tablist            |
+| `tablist`          | Container of tabs                      |
+| `tabpanel`         | Panel associated with a tab            |
+| `textbox`          | Text input field                       |
+| `tree`             | Tree-style list                        |
+| `treegrid`         | Hierarchical table/grid                |
+| `treeitem`         | Item in a tree                         |
+
+Document and Application Roles:
+........................................................
+| Role          | Description                                      |
+| ------------- | ------------------------------------------------ |
+| `application` | Treats area as a standalone app (use cautiously) |
+| `document`    | Static read-only content                         |
+| `log`         | Real-time log or chat window                     |
+| `marquee`     | Continuously updating text                       |
+| `status`      | Important status message (not interruptive)      |
+| `timer`       | Timer display                                    |
+| `tooltip`     | Help text                                        |
+| `alert`       | Urgent message (interruptive)                    |
+| `alertdialog` | Alert with user response required                |
+
+Live Region Roles (Announce content changes to screen readers)
+| Role      | Description                   |
+| --------- | ----------------------------- |
+| `alert`   | Announces updates immediately |
+| `log`     | Sequential updates            |
+| `marquee` | Scrolls and announces         |
+| `status`  | Non-interruptive updates      |
+| `timer`   | Regular countdown display     |
+************************************************************************************************************************************************************
+											coding
+************************************************************************************************************************************************************
+
+banner: header
+ <!-- <div>
+        <h1>Site Header</h1>
+    </div> -->
+    <!-- header semantic element is represented inside accessibility tree as "banner" -->
+    <!-- <header>
+        <h1>Site Header</h1>
+     </header> -->
+    <div role="banner">
+        <h1>Site Header</h1>
+    </div>
+
+navigation: -<nav>
+<body>
+    <div role="banner" tabindex="0">
+        <h1>Heading</h1>
+    </div>
+    <div role="navigation">
+        <ul>
+            <li>
+                <a href="#home">Home</a>
+            </li>
+            <li>
+                <a href="#about">About</a>
+            </li>
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+        </ul>
+    </div>
+</body>
+
+role=main -  <main>
+    <div role="main">
+        
+    </div>
+
+role=button:
+    <div role="main">
+        <img src="play-button.png" 
+        role="button" 
+        tabindex="0"
+        onclick="alert('img button is clicked')"
+        onkeydown="if(event.key==='Enter' || event.key===' ')this.click();"
+        alt="This is image button">
+    </div>
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+										 Tree View Using role="tree"
+*********************************************************************************************************************************************************
+<!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+
+    <body>
+        <div role="banner" tabindex="0">
+            <h1>ARIA tree</h1>
+        </div>
+        <div role="main">
+            <ul role="tree" tabindex="0">
+                <li role="treeitem" tabindex="0">Accessibility
+                    <ul role="group">
+                        <li role="treeitem">ARIA</li>
+                        <li role="treeitem">Semantic Elements</li>
+                        <li role="treeitem">Forms</li>
+                    </ul>
+                </li>
+                <li role="treeitem">Web
+                    <ul role="group">
+                        <li role="treeitem">HTML</li>
+                        <li role="treeitem">CSS</li>
+                        <li role="treeitem">Javascript</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </body>
+
+    </html>
+***********************************************************************************************************************************************************
+									Aria -States and Properties
+***********************************************************************************************************************************************************
+
+These are dynamic attributes that represent the current state of an element (e.g., expanded, selected, checked).
+
+Toggle and Input States:
+
+| State           | Values                                 | Description                                                           |
+| --------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| `aria-checked`  | `true`, `false`, `mixed`               | State of a checkbox, menuitemcheckbox, or switch                      |
+| `aria-pressed`  | `true`, `false`, `mixed`               | State of a toggle button                                              |
+| `aria-selected` | `true`, `false`                        | Selected state (e.g., tab, listbox item)                              |
+| `aria-expanded` | `true`, `false`                        | Whether content is expanded or collapsed (e.g., accordion, tree node) |
+| `aria-disabled` | `true`, `false`                        | Marks element as disabled (non-interactive)                           |
+| `aria-readonly` | `true`, `false`                        | Field cannot be modified but is still focusable                       |
+| `aria-required` | `true`, `false`                        | Indicates a field is required                                         |
+| `aria-invalid`  | `true`, `false`, `grammar`, `spelling` | Indicates validation error on input                                   |
+
+Visibility and Navigation States
+
+| State          | Values                                                      | Description                                                  |
+| -------------- | ----------------------------------------------------------- | ------------------------------------------------------------ |
+| `aria-hidden`  | `true`, `false`                                             | Hides the element from assistive technologies                |
+| `aria-busy`    | `true`, `false`                                             | Marks a region as loading/updating content                   |
+| `aria-current` | `page`, `step`, `location`, `date`, `time`, `true`, `false` | Indicates the current item within a set (e.g., current page) |
+
+ Live Region States
+
+| State           | Values                                 | Description                                                       |
+| --------------- | -------------------------------------- | ----------------------------------------------------------------- |
+| `aria-live`     | `off`, `polite`, `assertive`           | Priority for updates to be announced                              |
+| `aria-atomic`   | `true`, `false`                        | Whether the entire region should be read or just the changed part |
+| `aria-relevant` | `additions`, `removals`, `text`, `all` | Types of DOM changes to announce                                  |
+
+*********************************************************************************************************************************************************
+									ARIA Properties Cheat Sheet
+********************************************************************************************************************************************************			
+📌 ARIA properties provide static or contextual information about elements — unlike states, they don’t typically change dynamically.
+
+Labeling & Describing Properties:
+
+| Property           | Value Type      | Description                                                                            |
+| ------------------ | --------------- | -------------------------------------------------------------------------------------- |
+| `aria-label`       | string          | Defines a **custom accessible name** (overrides native text)                           |
+| `aria-labelledby`  | ID reference(s) | References one or more elements that **label** this element                            |
+| `aria-describedby` | ID reference(s) | References one or more elements that **describe** this element (e.g., hints, tooltips) |
+
+🧩 Relationship Properties
+| Property        | Value Type      | Description                                                                             |
+| --------------- | --------------- | --------------------------------------------------------------------------------------- |
+| `aria-controls` | ID reference(s) | Identifies elements **controlled** by the current element (e.g., tab controls tabpanel) |
+| `aria-owns`     | ID reference(s) | Declares elements as **owned** (use when not in the DOM tree hierarchy)                 |
+| `aria-flowto`   | ID reference(s) | Defines a custom **reading/navigation order**                                           |
+
+🎚️ Behavioral Properties
+| Property                | Values                                                       | Description                                                              |
+| ----------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------ |
+| `aria-haspopup`         | `menu`, `listbox`, `tree`, `grid`, `dialog`, `true`, `false` | Indicates a **popup** element will appear                                |
+| `aria-activedescendant` | ID reference                                                 | Identifies the **active child** (used in widgets like combobox, listbox) |
+| `aria-autocomplete`     | `inline`, `list`, `both`, `none`                             | Defines type of autocomplete behavior                                    |
+| `aria-multiselectable`  | `true`, `false`                                              | Whether **multiple selection** is allowed (e.g., in listbox or grid)     |
+| `aria-orientation`      | `horizontal`, `vertical`                                     | Direction of widgets (e.g., tabs, sliders)                               |
+| `aria-multiline`        | `true`, `false`                                              | Whether a `textbox` supports **multiple lines**                          |
+| `aria-readonly`         | `true`, `false`                                              | Whether the input is **read-only**                                       |
+
+ Live Region Properties (for dynamic content):
+| Property        | Values                                 | Description                                       |
+| --------------- | -------------------------------------- | ------------------------------------------------- |
+| `aria-live`     | `off`, `polite`, `assertive`           | Controls **announcement priority** of updates     |
+| `aria-relevant` | `additions`, `removals`, `text`, `all` | What types of **DOM changes** are important       |
+| `aria-atomic`   | `true`, `false`                        | Whether the **whole region or part** is announced |
+| `aria-busy`     | `true`, `false`                        | Marks content as **loading or updating**          |
+
+ Table/Grid Related Properties
+| Property        | Value Type | Description                                      |
+| --------------- | ---------- | ------------------------------------------------ |
+| `aria-colindex` | integer    | Column index in a table/grid                     |
+| `aria-rowindex` | integer    | Row index in a table/grid                        |
+| `aria-colcount` | integer    | Total columns                                    |
+| `aria-rowcount` | integer    | Total rows                                       |
+| `aria-colspan`  | integer    | Number of columns spanned by a cell              |
+| `aria-rowspan`  | integer    | Number of rows spanned by a cell                 |
+| `aria-level`    | integer    | Hierarchical level (e.g., tree or heading level) |
+| `aria-posinset` | integer    | Position in a set (e.g., list item)              |
+| `aria-setsize`  | integer    | Total number of items in the set                 |
+***********************************************************************************************************************************************************
+									label property
+
+To define a label for screen readers that is not visually visible
+Used when there is no visible text label, or visual label is not required for screen reader users.
+
+syntax
+<element aria-lable="label text"></element>
+
+
+eg:
+    <input type="text" name="name">
+
+When you run wav tool, this is going to throw error
+
+Report:
+Missing form label
+
+What It Means
+A form control does not have a corresponding label.
+
+Why It Matters
+If a form control does not have a properly associated text label, the function or purpose of that form control may not be presented to screen reader users. Form labels also provide visible descriptions and larger clickable targets for form controls.
+
+How to Fix It
+	If a text label for a form control is visible, use the <label> element to associate it with its respective form control.
+    If there is no visible label, either provide an associated label, add a descriptive title attribute to the form control, or reference the label(s)       using aria-labelledby.
+ Labels are not required for image, submit, reset, button, or hidden form controls
+************************************************************************************************************************************************************
+
+aria-lable:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <label for="firstname">First name:</label>
+    <input type="text" name="firstname" id="firstname">
+    <input type="text" name="lastName" aria-label="Enter Your last Name">
+    <div role="button" aria-label="Open Menu">
+
+    </div>
 </body>
 
 </html>

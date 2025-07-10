@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Home</title> <!-- Generic title -->
+    <style>
+        body {
+            background-color: lightgray;
+            color: gray;
+            /* Low contrast */
+            font-size: 14px;
+        }
+
+        .button {
+            background-color: green;
+            color: white;
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .carousel {
+            animation: slide 2s infinite alternate;
+        }
+
+        @keyframes slide {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(50px);
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- No landmarks like <header>, <main>, etc. -->
+
+    <!-- No heading tags -->
+    <div style="font-size: 24px; font-weight: bold;">
+        <h1> Welcome to Our Site</h1>
+    </div>
+
+    <!-- Image without alt -->
+    <img src="banner.jpg">
+
+    <!-- Poor contrast text -->
+    <p>This is a sample site with very light gray text on a light background.</p>
+
+    <!-- Form without labels -->
+    <form>
+        Name: <input type="text" name="name"><br><br>
+        Email: <input type="email" name="email"><br><br>
+        <button type="submit" class="button">Submit</button>
+    </form>
+
+    <!-- No keyboard focus styles -->
+    <a href="about.html" class="button">About Us</a>
+
+    <!-- Auto-animated element -->
+    <div class="carousel">This content is sliding automatically!</div>
+
+    <!-- No captions or transcripts -->
+    <video autoplay muted loop>
+        <source src="sample.mp4" type="video/mp4">
+    </video>
+
+</body>
+
+</html>

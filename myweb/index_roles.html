@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="expirationWarning" role="alert">
+        <span class="hidden">Your log in session will expire in 2 minutes</span>
+    </div>
+    <div role="alertdialog" aria-labelledby="dialog1Title" aria-describedby="dialog1Desc">
+        <div role="document" tabindex="0">
+            <h2 id="dialog1Title">Your login session is about to expire</h2>
+            <p id="dialog1Desc">To extend your session, click the OK button</p>
+            <button>OK</button>
+        </div>
+    </div>
+    <label for="close">Close</label>
+    <button id="close">X</button>
+    <button aria-label="close">XX</button>
+
+    <div id="te">X</div>
+    <button aria-labelledby="te">Close</button>
+
+    <span role="checkbox" aria-checked="false" aria-labelledby="tac"></span>
+    <span id="tac">I agree to the Terms and Conditions.</span>
+
+    <button>
+        <span class="fa fa-tweet" aria-hidden="true"></span>
+        <span class="label"> Tweet </span>
+    </button>
+    <p id="listbox1label" role="label">Select a color:</p>
+    <div role="listbox" tabindex="0" id="listbox1" aria-labelledby="listbox1label" aria-activedescendant="listbox1-1">
+        <div role="option" id="listbox1-1" class="selected" aria-selected="true">
+            Green
+        </div>
+        <div role="option" id="listbox1-2">Orange</div>
+        <div role="option" id="listbox1-3">Red</div>
+        <div role="option" id="listbox1-4">Blue</div>
+        <div role="option" id="listbox1-5">Violet</div>
+        <div role="option" id="listbox1-6">Periwinkle</div>
+    </div>
+    <div role="banner">
+        <h1>My Website</h1>
+        <p>Accessible Web Design with ARIA</p>
+    </div>
+</body>
+
+</html>
