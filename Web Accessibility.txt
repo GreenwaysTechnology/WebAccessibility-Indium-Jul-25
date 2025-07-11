@@ -1376,3 +1376,311 @@ Screen readers will announce: "Enter Address edit field: We will never share you
         </div>
         <button aria-describedby="tooltip1">Info</button>
     </div>
+***********************************************************************************************************************************************************
+										React with WCAG and ARIA
+**********************************************************************************************************************************************************
+
+React Project:
+npm create vite@latest
+Need to install the following packages:
+create-vite@7.0.3
+Ok to proceed? (y) y
+
+
+> npx
+> create-vite
+
+|
+o  Project name:
+|  react-wcag
+|
+o  Select a framework:
+|  React
+|
+o  Select a variant:
+|  JavaScript
+|
+o  Scaffolding project in G:\Indium\react-wcag...
+|
+—  Done. Now run:
+
+  cd react-wcag
+  npm install
+  npm run dev
+***********************************************************************************************************************************************************
+
+Simple Example:
+
+import { StrictMode } from 'react'
+import { createRoot } from 'react-dom/client'
+// import './index.css'
+// import App from './App.jsx'
+
+const Header = () => {
+
+  // return <header>
+  //       <h1>Header</h1>
+  // </header>
+  return <div role="banner" >
+    <h1 tabIndex="0">Header</h1>
+    <nav>
+        <ul>
+          <li><a href="">Home</a></li>
+        </ul>
+    </nav>
+  </div>
+}
+
+
+const App = () => {
+  return <>
+    <Header />
+  </>
+}
+
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+
+Task:
+ Create simple web page which contains header,footer,nav bar,main and sections 
+   You can try with semantic elements or with "ARIA Role"
+***********************************************************************************************************************************************************
+										Toggle Button with Accessibility feature
+
+When the user toggles the button, screen reader users must know that button is toggled - On or Off
+
+role=switch
+ Is used to defined custom toggle switch (like on/Off) 
+
+How to track on/off state?
+aria-checked =true/false
+aria-labledBy /aria-label
+
+import { StrictMode, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+
+
+function ToggleButton() {
+  const [isOn, setIsOn] = useState(false)
+  const styles = {
+    display: 'inline-block',
+    padding: '10px 20px',
+    background: isOn ? '#4caf50' : '#ccc',
+    borderRadius: '20px',
+    cursor: 'pointer',
+    outline: 'none'
+
+  }
+  const toogle = () => setIsOn((prev) => !prev)
+
+  return <>
+    <header tabIndex={0}>Header</header>
+    <div
+      role="switch"
+      aria-checked={isOn}
+      tabIndex={0}
+      style={styles}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault()
+          toogle()
+        }
+      }}
+      onClick={toogle}
+    >
+      {isOn ? 'ON' : 'OFF'}
+    </div>
+  </>
+}
+
+const App = () => {
+  return <>
+    <ToggleButton />
+  </>
+}
+
+
+createRoot(document.getElementById('root')).render(
+  <StrictMode>
+    <App />
+  </StrictMode>,
+)
+***********************************************************************************************************************************************************
+								Dropdown with ARIA Roles,keyBoard Navigation
+********************************************************************************************************************************************************
+
+ARIA Properties used in this example
+aria-haspopup="listbox"
+    Which is used to indicate that an element can trigger a popup and also specifies the type of popups - like menus,dialog,listbox
+This helps screen readers and other assistive technologies understand what kind of interaction to expect.
+
+<div aria-haspopup="listbox">
+What it does:
+ Tells users that interacting with element will open a popup
+  Screen reader accounce the type of popup like model,dialog,menu,grid | true | false
+
+aria-expanded=true | false
+
+ It describes whether an element like menu, accrodin,dropdown is currently expanded or collapsed---- it is way of making interactive content accessible to the screen readers
+
+<div   aria-expanded={true|false}>
+
+aria-controls:
+.....................
+ This is link property/attribute
+ It is used to link a control element like button or tab to the element it affects
+
+<button aria-controls="panel">Show Info</button>
+
+<div id="panel" hidden>
+      <p>xxxx </p>
+</div>
+
+import { StrictMode, useState, useRef, useEffect } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+
+const options = ['Apple', 'Banana', 'Cherry', 'Mango', 'Orange']
+
+function DropDown() {
+
+    const [isOpen, setIsOpen] = useState(false)
+    const [selectedOption, setSelectedOption] = useState(null)
+    const [highlightedIndex, setHighlightedIndex] = useState(0);
+    //this is variable is used to make focus
+    const containerRef = useRef(null);
+
+    const handleSelect = (index) => {
+        setSelectedOption(options[index])
+        setIsOpen(false)
+    }
+
+    useEffect(() => {
+        const current = containerRef.current;
+        if (current) current.focus();
+    }, [isOpen]);
+
+    const handleKeyDown = (e) => {
+        if (!isOpen) {
+            if (e.key === 'Enter' || e.key === ' ' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                setIsOpen(true);
+            }
+            return;
+        }
+
+        if (isOpen) {
+            switch (e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    setHighlightedIndex((prev) => (prev + 1) % options.length);
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    setHighlightedIndex((prev) => (prev - 1 + options.length) % options.length);
+                    break;
+                case 'Enter':
+                case ' ':
+                    e.preventDefault();
+                    handleSelect(highlightedIndex);
+                    break;
+                case 'Escape':
+                    e.preventDefault();
+                    setIsOpen(false);
+                    break;
+                default:
+                    break;
+            }
+        }
+    };
+
+    return  <div role="banner" tabIndex={0}>
+            <h1>Header</h1>
+        <div
+            ref={containerRef}
+            tabIndex={0}
+            role
+            onKeyDown={handleKeyDown}
+            style={{ width: '220px', outline: 'none' }}
+        >
+
+            <div
+                role="button"
+                aria-haspopup="listbox"
+                aria-expanded={isOpen}
+                aria-controls="fruits-listbox"
+                style={{
+                    marginTop: '50px',
+                    padding: '10px',
+                    border: '1px solid #cccc',
+                    borderRadius: '4px',
+                    backgroundColor: '#a5baa5ff',
+                    cursor: 'pointer'
+                }}
+            >
+                {selectedOption ? selectedOption : 'Select a fruit'}
+            </div>
+            {isOpen && (
+                <ul id="fruits-listbox"
+                    role="listbox"
+                    style={{
+                        listStyle: 'none',
+                        margin: 0,
+                        padding: 0,
+                        border: '1px soid #ccc',
+                        maxHeight: '150px',
+                        overFlowY: 'auto',
+                        background: 'White'
+                    }}>
+                    {options.map((option, index) => {
+                        return <li
+                            key={index}
+                            role='option'
+                            aria-selected={selectedOption === option}
+                            id={`option-${index}`}
+                            onClick={(e) => {
+                                handleSelect(index)
+                            }}
+                            style={{
+                                padding: '8px',
+                                backgroundColor: highlightedIndex === index ? '#007bff' : '',
+                                color: highlightedIndex === index ? 'white' : 'black',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            {option}
+                        </li>
+                    })}
+                </ul>
+            )}
+        </div>
+    </div>
+}
+
+const App = () => {
+    return <>
+        <DropDown />
+    </>
+}
+
+
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <App />
+    </StrictMode>,
+)
+************************************************************************************************************************************************************
+										 POUR AND React
+***********************************************************************************************************************************************************
+
+
+
+
+
