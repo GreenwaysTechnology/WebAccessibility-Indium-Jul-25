@@ -8,12 +8,16 @@
 </head>
 
 <body>
+    <p id="desc1">Enter your Full Name</p>
+    <input type="text" aria-describedby="desc1">
+    <input type="email" aria-describedby="emailHelp">
+    <span id="emailHelp">We will never share your email with anyone else</span>
 
-    <label for="firstname">First name:</label>
-    <input type="text" name="firstname" id="firstname">
-    <input type="text" name="lastName" aria-label="Enter Your last Name">
-    <div role="button" aria-label="Open Menu">
-
+    <div role="section">
+        <div id="tooltip1" role="tooltip">
+            Click to View more Details about Your Account
+        </div>
+        <button aria-describedby="tooltip1">Info</button>
     </div>
 </body>
 

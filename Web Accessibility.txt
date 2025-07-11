@@ -1333,3 +1333,46 @@ aria-lable:
 </body>
 
 </html>
+**********************************************************************************************************************************************************
+								                     aria-labledby
+***********************************************************************************************************************************************************
+By providing accessible name to an element using one or more IDS as labels
+
+References other elements by their id to define a label for the current element
+eg:
+<span id="FirstName">First Name</span>
+ <span id="lastName">Last Name</span>
+ <input type="text"  aria-labelledby="FirstName lastName">
+
+You coimbine multiple lables using space-separated id.
+Does not provide native lable functionality like click-to-focus - you will need js for this
+
+When to Use:
+-When you want to resue existing content as a label
+-For Custom ui components that does not support native labels
+-To have multiple label texts
+************************************************************************************************************************************************************
+										aria-describedby
+********************************************************************************************************************************************************
+
+It is used to provide additional  descriptive information for screen reader users
+
+Use cases:
+1.tool tips or help text
+2.Error messages
+3.Detailed form field information
+4.Additional informations for buttons and images
+
+ <p id="desc1">Enter your Full Name</p>
+    <input type="text" aria-describedby="desc1">
+    <input type="email" aria-describedby="emailHelp">
+    <span id="emailHelp">We will never share your email with anyone else</span>
+
+Screen readers will announce: "Enter Address edit field: We will never share your email with anyone else
+
+  <div role="section">
+        <div id="tooltip1" role="tooltip">
+            Click to View more Details about Your Account
+        </div>
+        <button aria-describedby="tooltip1">Info</button>
+    </div>
