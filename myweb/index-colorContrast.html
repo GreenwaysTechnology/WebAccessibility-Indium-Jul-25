@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Contrast</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+
+        .good-contrast {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .bad-contrast {
+            background-color: #a30a0a;
+            color: #000000;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .border-test {
+            border: 2px solid #eee;
+            color: #eee;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .link-test {
+            background-color: #222;
+            color: #00f;
+            padding:10px;
+            margin-bottom: 15px;
+        }
+        .large-text {
+            background-color: #004488;
+            color:#ffffff;
+            font-size: 24px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div role="banner">
+        <h1 tabindex="0">Contract Checker</h1>
+    </div>
+    <main class="good-contrast">
+        <p>Good Contrast - (black and White)</p>
+        <p>This text passes WCAG AA and Standard AAA</p>
+    </main>
+    <main class="bad-contrast">
+        <p>Bad Contrast - (red and black)</p>
+        <p>This text passes WCAG AA and Standard AAA</p>
+    </main>
+
+    <section class="border-test">
+        <p>Border and Text color- (very Low contrast)</p>
+        <p>This text blends into background</p>
+    </section>
+
+    <nav class="link-test">
+        <a href="#" >Click Here</a>
+    </nav>
+
+    <section class="large-text">
+        Large Text
+    </section>
+
+</body>
+
+</html>

@@ -1677,10 +1677,619 @@ createRoot(document.getElementById('root')).render(
     </StrictMode>,
 )
 ************************************************************************************************************************************************************
-										 POUR AND React
+										 POUR AND React (HTML)
+								 Perceivable, Operable, Understandable, Robust.
+***********************************************************************************************************************************************************
+Perceivable:
+**************
+	The Perceivable principle in the Web Content Accessibility Guidelines (WCAG) ensures that users" can access and understand content through their available senses"—especially sight and hearing.
+It’s the first of the four POUR principles: Perceivable, Operable, Understandable, Robust.
+
+Information and user interface components must be presentable to users in ways they can perceive.
+
+📷 Guideline 1.1 – Text Alternatives (Level A)
+- Provide alt text for images so screen readers can describe them.
+- Use captions for audio and video content.
+- Offer text descriptions for complex visuals like charts or infographics.
+
+Guideline 1.2 Time-Based Media (Level A, AA, AAA)
+	Provide alternatives for multimedia:
+	       Captions (A) for prerecorded audio/video.
+	       Audio Descriptions (AA) for important visual content in videos.
+	       Sign Language Interpretation (AAA) for complex media.
+
+ Guideline 1.3 – Adaptable (Level A, AA)
+Ensure content can be presented in different ways without losing meaning:
+	-Semantic HTML (proper headings, lists, landmarks).
+	-Correct reading order (CSS should not disrupt logical flow).
+	-Avoid reliance on sensory characteristics (e.g., "Click the green button" should not be the only instruction).
+
+ Guideline 1.4 – Distinguishable (Level A, AA, AAA)
+Make it easier for users to see and hear content:
+	Color contrast (AA) – at least 4.5:1 for normal text.
+	Text resizing (AA) – text should be readable when zoomed to 200%.
+	No audio autoplay (A) – avoid unexpected sounds.
+	Text spacing (AA) – users should adjust spacing without loss of content.
+
+Why is Perceivable Important?
+	-Helps users with visual, auditory, or cognitive disabilities.
+	-Ensures content works with screen readers, braille displays, and captions.
+	-Improves usability for all users, including those in bright sunlight or noisy environments.
+***********************************************************************************************************************************************************
+									Guideline 1.1 – Text Alternatives (Level A)
 ***********************************************************************************************************************************************************
 
+Goal: All non-text content (images, icons, charts, etc.) must have a text alternative.
+
+Key Requirements:
+Images: Use alt text (or ARIA labels if alt isn’t possible)
+<img src="chart.png" alt="Bar chart showing 2023 sales growth: 15% increase">  
+
+Decorative Images: Use empty alt (alt="") so screen readers skip them.
+Complex Graphics (charts, diagrams): Provide a detailed description nearby or link to a full explanation.
+
+Common Failures:
+❌ Missing alt attributes.
+❌ Using placeholder text like alt="image" or alt="spacer".
+❌ Relying on filenames (e.g., alt="IMG_0234.jpg").
+
+Types of Text Alternatives:
+
+
+A. Short Descriptions (alt Text)
+...........................................................
+Used for simple images where a brief description suffices.
+
+Example:
+
+html
+<img src="search-icon.png" alt="Search">  
+
+Best Practices:
+
+Be concise (usually under 150 characters).
+Avoid "image of" or "picture of" (screen readers announce it as an image).
+If the image is purely decorative, use alt="" (empty alt).
+
+B. Long Descriptions (aria-describedby or Adjacent Text)
+Used for complex images (charts, diagrams, infographics).
+
+Example:
+
+html
+<img src="sales-chart.png" alt="2023 Quarterly Sales Growth" aria-describedby="chart-desc">  
+<p id="chart-desc">Bar chart showing Q1: $10K, Q2: $15K, Q3: $20K, Q4: $25K.</p>  
+
+Alternative: Link to a separate page with a full description.
+
+C. Functional Images (Buttons, Links, Logos)
+Logo linking to homepage:
+
+html
+<a href="/">  
+  <img src="logo.png" alt="Go to Homepage">  
+</a>  
+Icon buttons:
+
+html
+<button>  
+  <img src="print-icon.png" alt="Print this page">  
+</button>
+
+D. Decorative & Redundant Images
+Decorative (e.g., background flourishes):
+
+html
+<img src="divider.png" alt="">  
+
+
+E.Redundant (if text already explains it):
+html
+<button>  
+  <img src="search-icon.png" alt="">  
+  Search  
+</button>  
+
+3. Special Cases & Advanced Techniques
+A. CAPTCHA Alternatives
+Must provide audio CAPTCHA for users who can’t see images.
+Better: Use non-visual verification methods (e.g., logic questions).
+
+B. SVG & Icon Fonts
+SVG with title and desc:
+
+html
+<svg role="img" aria-labelledby="svg-title svg-desc">  
+  <title id="svg-title">Warning</title>  
+  <desc id="svg-desc">A triangle with an exclamation mark inside.</desc>  
+  <!-- SVG path data here -->  
+</svg>  
+
+
+Icon fonts (Font Awesome):
+html
+<i class="fa fa-trash" aria-hidden="true"></i>  
+<span class="sr-only">Delete</span>  
+
+C. CSS Background Images
+	If the image conveys meaning, provide a hidden text alternative:
+
+html
+<div class="warning-icon" aria-label="Warning"></div>  
+If purely decorative, no action is needed.
+
+
+. Common Mistakes & Failures
+❌ Missing alt entirely (screen readers may read the filename).
+❌ Vague alt text (e.g., alt="image", alt="chart").
+❌ Redundant alt text (e.g., alt="Company Logo [Company Name]" when the logo already has adjacent text).
+❌ Using alt for decorative images (should be alt="").
+❌ Embedding text in images (e.g., infographics without a text version).
+
+ Real-World Examples
+✅ Good Examples:
+Logo:
+
+html
+<img src="logo.png" alt="Acme Corporation">  
+Infographic:
+
+html
+<img src="workflow.png" alt="Project workflow: 1. Plan 2. Design 3. Develop 4. Test">  
+Button with Icon:
+
+html
+<button>  
+  <img src="download-icon.png" alt=""> Download Report  
+</button> 
+
+❌ Bad Examples:
+
+Missing alt:
+
+html
+<img src="profile-pic.jpg"> <!-- Screen reader reads file name -->  
+
+Redundant:
+
+html
+<img src="logo.png" alt="Logo of ABC Company"> <!-- If "ABC Company" is already visible next to it -->  
+Overly verbose:
+
+html
+<img src="cat.jpg" alt="A small, fluffy gray cat with green eyes sitting on a windowsill in sunlight, looking curiously at the camera.">  
+<!-- Better: "Gray cat on windowsill" -->  
+
+ Key Takeaways
+✔ Every image must have an alt attribute (even if empty for decorative images).
+✔ Keep alt text concise but meaningful (describe function, not just appearance).
+✔ For complex images, provide a long description (via aria-describedby or a link).
+✔ Test with screen readers & automated tools to ensure compliance.
+
+Task:
+	Each Rule must be simulated by writing react /angular/ plain html
+
+Sample:
+3. Decorative Images
+❌ Bad (Unnecessary alt Text)
+jsx
+// Bad: Decorative image with redundant alt
+function BadDecorative() {
+  return <img src="/divider.png" alt="Decorative divider" />;
+}
+Issue:
+Screen readers unnecessarily announce it.
+
+✅ Good (Empty alt)
+jsx
+// Good: Empty alt for decorative images
+function GoodDecorative() {
+  return <img src="/divider.png" alt="" />;
+}
+Why it’s good:
+
+alt="" tells screen readers to skip it.
+
+***********************************************************************************************************************************************************
+								Guideline 1.2 Time-Based Media (Level A, AA, AAA)
+									        (videos ,Audio)
+***********************************************************************************************************************************************************
+
+Objective:
+    Ensure pre-recorded audio/video is accessible to people who are deaf, hard of hearing, blind, or have cognitive disabilities.
+
+1. Understanding WCAG Levels (A, AA, AAA)
+
+Level	Requirement											Who Benefits?
+
+A		Captions for pre-recorded audio/video						Deaf/HoH users
+AA		Audio descriptions (if visuals aren’t explained in audio)		Blind users
+AAA		Extended audio descriptions + Sign language interpretation	Highest accessibility
+
+2. Captions (Level A) – Core Requirements
+Definition:
+
+Captions = Text version of speech + important sounds (e.g., [door creaks], [music playing]).
+
+Must be synchronized with the media.
+
+Types of Captions:
+Closed Captions (CC)
+	Can be toggled on/off (e.g., YouTube CC button).
+Open Captions
+	Burned into the video (always visible).
+
+What Must Be Captioned?
+✔ All speech (dialogue, narration).
+✔ Key sound effects (e.g., [glass shattering], [phone ringing]).
+✔ Speaker identification (e.g., [Narrator]:, [John]).
+✔ Music cues (e.g., [suspenseful music]).
+
+
+❌ Common Failures (Bad Captions)
+Auto-generated captions with errors (e.g., "brain" instead of "brand").
+Missing sound descriptions (e.g., a gunshot isn’t captioned).
+Poor synchronization (text lags behind audio).
+
+✅ Good Captioning Examples
+<video controls>
+  <source src="tutorial.mp4" type="video/mp4">
+  <track 
+    src="captions.vtt" 
+    kind="captions" 
+    srclang="en" 
+    label="English" 
+    default
+  >
+</video>
+captions.vtt Example (WebVTT Format)
+vtt
+WEBVTT
+
+00:00:05.000 --> 00:00:08.000
+[Narrator]: Welcome to our tutorial.
+
+00:00:09.000 --> 00:00:12.000
+[Computer beeps] Press the red button.
+
+4. Sign Language Interpretation (Level AAA)
+Definition:
+	A sign language (e.g., ASL) video alongside the main content for Deaf users who rely on signing.
+
+Implementation Options:
+Picture-in-Picture (PiP) Sign Language
+
+html
+<video controls>
+  <source src="main-video.mp4" type="video/mp4">
+  <source src="asl-interpreter.mp4" type="video/mp4">
+</video>
+Separate Video Link
+
+html
+<a href="asl-version.html">Watch ASL Interpretation</a>
+
+5. Transcripts (Fallback for All Levels)
+Definition:
+
+Full text version of audio/video (includes speech, sounds, and visual descriptions).
+
+✅ Good Transcript Example
+
+# Tutorial: How to Reset Your Password
+
+**[00:00:05] Narrator:** "Welcome to our tutorial."  
+**[00:00:09] [Computer beeps]**  
+**[00:00:10] On-screen:** A "RESET" button appears.  
+**[00:00:12] Narrator:** "Press the red button." 
+
+. Key Takeaways
+
+Requirement		   	Level		Implementation
+
+Captions				 A		      WebVTT (<track kind="captions">)
+
+Audio Descriptions 	AA			WebVTT  (<track kind="descriptions">)
+
+Sign Language		AAA			PiP video or separate link
+
+Transcript		        A+			Plain text with full context
+
+
+Sample Code:
+
+import React from 'react';
+
+function VideoWithCaptions() {
+  return (
+    <div>
+      <h2>Accessible Video with Captions</h2>
+      <video controls width="600">
+        <source src="/tutorial.mp4" type="video/mp4" />
+        {/* WebVTT Captions Track */}
+        <track
+          src="/captions.vtt"
+          kind="captions"
+          srcLang="en"
+          label="English"
+          default
+        />
+        {/* Fallback for browsers that don't support video */}
+        <p>Your browser doesn’t support HTML5 video. 
+          <a href="/tutorial.mp4">Download the video</a> instead.
+        </p>
+      </video>
+    </div>
+  );
+}
+
+export default VideoWithCaptions;
+
+Example captions.vtt File (Place in public/ folder):
+
+vtt
+WEBVTT
+
+00:00:00.000 --> 00:00:03.000
+[Narrator]: Welcome to our accessibility tutorial.
+
+00:00:04.000 --> 00:00:07.000
+[Sound Effect]: [Door creaks]
+
+00:00:08.000 --> 00:00:10.000
+[Speaker 1]: Press the "Start" button to begin.
+
+*********************************************************************************************************************************************************
+									1.3.Adaptable (Level A, AA) requirements
+********************************************************************************************************************************************************
 
 
 
+1. Semantic HTML
+Use proper heading hierarchy (<h1> to <h6>) for document structure.
+Mark up lists (<ul>, <ol>, <dl>) and tables (<table>, <th>, <caption>) correctly.
+Include ARIA landmarks (<nav>, <main>, <aside>, <footer>) for navigation and structure.
+
+2. Correct Reading Order
+
+Ensure the DOM order matches the logical reading sequence.
+Avoid using CSS (e.g., float, absolute positioning) to visually reorder content in a way that disrupts the underlying HTML flow.
+Test with keyboard navigation (Tab order) and screen readers to verify logical flow.
+
+3. Avoid Sensory Characteristics
+Do not rely solely on color, shape, size, or sound for instructions.
+
+❌ "Click the green button" → ✅ "Click the green 'Submit' button" (include text/label).
+
+❌ "See the circled item" → ✅ "See the circled 'Important Notice' below."
+
+Ensure icons have text alternatives (e.g., aria-label or visible text).
+************************************************************************************************************************************************************							 Guideline 1.4 – Distinguishable (Level A, AA, AAA)
+************************************************************************************************************************************************************
+Make it easier for users to see and hear content:
+	Color contrast (AA) – at least 4.5:1 for normal text.
+	Text resizing (AA) – text should be readable when zoomed to 200%.
+	No audio auto play (A) – avoid unexpected sounds.
+	Text spacing (AA) – users should adjust spacing without loss of content.
+
+Distinguishable Requirements by Level:
+
+Level A (Minimum Accessibility)
+	Color is Not the Only Visual Means (1.4.1)
+	Information conveyed with color must also be available through text or other visual cues (e.g., underlined links, icons, patterns).
+
+Audio Control (1.4.2)
+
+If audio plays automatically for more than 3 seconds, users must have a way to pause or stop it.
+Level AA (Strong Accessibility – Common Standard)
+
+
+Contrast Minimum (1.4.3)
+
+Text must have a contrast ratio of at least 4.5:1 (normal text) or 3:1 (large text, 18pt+ or bold 14pt+).
+Exception: Logos and decorative text have no contrast requirement.
+
+Text Resize (1.4.4)
+
+Text must be resizable up to 200% without loss of content or functionality.
+
+Images of Text (1.4.5)
+Avoid using images of text unless necessary (e.g., logos). Prefer CSS-styled text for better scalability and accessibility.
+
+Level AAA (Highest Accessibility)
+Contrast Enhanced (1.4.6)
+Text must have a contrast ratio of at least 7:1 (normal text) or 4.5:1 (large text).
+
+Low or No Background Audio (1.4.7)
+ Pre-recorded audio should have minimal or no background noise, or a way to turn it off.
+
+Visual Presentation (1.4.8)
+
+Users should be able to customize text (spacing, alignment, width, colors) for readability.
+No justified text (prevents "rivers of space" in paragraphs).
+Line spacing ≥ 1.5× font size, paragraph spacing ≥ 2× font size.
+Images of Text (No Exception) (1.4.9)
+Avoid images of text entirely unless essential (e.g., branding).
+
+Key Takeaways:
+1.Level A ensures basic distinguishability (no color-only cues, audio control).
+2.Level AA (most common compliance target) adds contrast, text resizing, and discourages images of text.
+3.Level AAA (highest) requires stronger contrast, customizable text, and stricter audio/image rules.
+						Understanding Color Contrast in WCAG (1.4.3 & 1.4.6)
+
+Color contrast ensures that text is readable against its background, particularly for users with low vision, color blindness, or in low-light conditions.
+
+WCAG Color Contrast Requirements:
+
+Normal Text (≤18pt / ≤14pt bold)	
+Large Text (≥18pt / ≥14pt bold)	Graphical Objects & UI Components
+
+AA (Minimum)	4.5:1	3:1	3:1 (for essential UI elements like buttons, icons)
+AAA (Enhanced)	7:1	4.5:1	4.5:1 (for critical interact
+
+Key Rules:
+
+Text vs. Background
+Standard text must meet 4.5:1 (AA) or 7:1 (AAA).
+
+Large text (≥18pt normal or ≥14pt bold) needs 3:1 (AA) or 4.5:1 (AAA).
+
+Non-Text Elements (Icons, Buttons, Graphs)
+Interactive components (buttons, form fields) must have ≥3:1 (AA) contrast.
+Icons and graphs conveying information should also meet contrast standards.
+
+Exceptions:
+
+Logos & decorative text (no contrast requirement).
+Disabled/inactive elements (e.g., grayed-out buttons).
+
+https://coolors.co/contrast-checker/112a46-1167c2
+
+4.5: 1 contrast ratio:
+.................................
+ 4.5:1 contrast ratio is a way to measure how readable text is against its background, especially for people with visual impairments. It’s part of the Web Content Accessibility Guidelines (WCAG), which aim to make digital content more accessible.
+
+Breaking Down the Ratio
+- 4.5 represents the relative luminance of the lighter color (usually the text or background).
+- 1 represents the relative luminance of the darker color.
+So when we say 4.5:1, it means the lighter color is 4.5 times brighter than the darker one. This ratio ensures that standard-sized text is legible for most users, including those with moderate vision loss.
+
+ How It's Calculated
+The contrast ratio is calculated using this formula:
+(L1 + 0.05) / (L2 + 0.05)
+
+- L1 is the luminance of the lighter color.
+- L2 is the luminance of the darker color.
+The result gives you a number like 4.5:1, 7:1, etc.
+
+Why It Matters
+- 4.5:1 is the minimum required for normal text under WCAG Level AA.
+- Larger or bold text can get by with a lower ratio like 3:1.
+- For maximum accessibility (Level AAA), the ratio should be 7:1.
+
+eg:
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Contrast</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            padding: 20px;
+        }
+
+        .good-contrast {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .bad-contrast {
+            background-color: #a30a0a;
+            color: #000000;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+
+        .border-test {
+            border: 2px solid #eee;
+            color: #eee;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+        .link-test {
+            background-color: #222;
+            color: #00f;
+            padding:10px;
+            margin-bottom: 15px;
+        }
+        .large-text {
+            background-color: #004488;
+            color:#ffffff;
+            font-size: 24px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div role="banner">
+        <h1 tabindex="0">Contract Checker</h1>
+    </div>
+    <main class="good-contrast">
+        <p>Good Contrast - (black and White)</p>
+        <p>This text passes WCAG AA and Standard AAA</p>
+    </main>
+    <main class="bad-contrast">
+        <p>Bad Contrast - (red and black)</p>
+        <p>This text passes WCAG AA and Standard AAA</p>
+    </main>
+
+    <section class="border-test">
+        <p>Border and Text color- (very Low contrast)</p>
+        <p>This text blends into background</p>
+    </section>
+
+    <nav class="link-test">
+        <a href="#" >Click Here</a>
+    </nav>
+
+    <section class="large-text">
+        Large Text with
+    </section>
+
+</body>
+
+</html>
+
+
+Descrition 					  Text Size                                  Pass/Fail               Level
+
+Normal Text (dark on light)              16px                                           pass                     AA/AAA
+
+Normal Text (light on light)              16px                                           fail                        fail AA
+
+Large Text (bold 24px)                   High contrast                              pass                     AA/AAA
+
+Large Text (bold 24px)                   Low contrast                              fail                        Fail AA
+          
+
+************************************************************************************************************************************************************
+											Perceivable Rules Code
+************************************************************************************************************************************************************
+
+Code With Error:
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perceivable</title>
+</head>
+<body>
+    <img src="play-button.png">
+    <div style="color:gray;background-color:lightgrey;">
+        special Offer!
+    </div>
+    <p>This is test page</p>
+    <video controls>
+        <source src="demo.mp4" type="vido/mp4">
+    </video>
+    <input type="text" id="email" placeholder="Enter Email">
+    <button>Subscribe</button>
+    
+</body>
+</html>
+
+Errors:
+
+You have list out
+
+Solution:
+
+What are fixes:
 
