@@ -2292,4 +2292,189 @@ You have list out
 Solution:
 
 What are fixes:
+**********************************************************************************************************************************************************
+											    POUR
+									Operable Principles (Able to operate)
+**********************************************************************************************************************************************************
+The WCAG Operable Principles are part of the Web Content Accessibility Guidelines (WCAG), which ensure that digital content is accessible to all users, including those with disabilities. The Operable principle focuses on making user interface components and navigation functional for everyone, including keyboard-only users and those relying on assistive technologies.
+
+Key Guidelines Under Operable (2.1 - 2.5)
+
+2.1 Keyboard Accessible (Guideline 2.1)
+	2.1.1 Keyboard (A) – All functionality must be operable via a keyboard.
+	2.1.2 No Keyboard Trap (A) – Users should not get stuck in keyboard focus traps.
+	2.1.4 Character Key Shortcuts (AAA) – Avoid single-key shortcuts unless they can be turned off or remapped.
+
+2.2 Enough Time (Guideline 2.2)
+	2.2.1 Timing Adjustable (A) – Users should be able to adjust or turn off time limits.
+	2.2.2 Pause, Stop, Hide (A) – Moving, blinking, or auto-updating content should have controls.
+	2.2.3 No Timing (AAA) – No time limits except for real-time events (e.g., auctions).
+	2.2.4 Interruptions (AAA) – Users should be able to postpone interruptions.
+	2.2.5 Re-authenticating (AAA) – Sessions should resume after re-authentication.
+
+2.3 Seizures and Physical Reactions (Guideline 2.3)
+	2.3.1 Three Flashes or Below Threshold (A) – Avoid flashing content that could trigger seizures (<3 flashes per second).
+	2.3.2 Three Flashes (AAA) – No content flashes more than 3 times per second.
+
+2.4 Navigable (Guideline 2.4)
+	2.4.1 Bypass Blocks (A) – Provide "Skip to Content" links to bypass repetitive navigation.
+	2.4.2 Page Titled (A) – Pages should have descriptive titles.
+       2.4.3 Focus Order (A) – Logical keyboard navigation order.
+       2.4.4 Link Purpose (In Context) (A) – Links should make sense out of context.
+      2.4.5 Multiple Ways (AA) – Offer multiple navigation methods (e.g., search, sitemap).
+      2.4.6 Headings and Labels (AA) – Clear and descriptive headings/labels.
+      2.4.7 Focus Visible (AA) – Keyboard focus should be clearly visible.
+
+2.5 Input Modalities (Guideline 2.5)
+      2.5.1 Pointer Gestures (A) – Avoid complex gestures (e.g., pinch/zoom) as the only input method.
+       2.5.2 Pointer Cancellation (A) – Ensure pointer actions can be canceled. 
+       2.5.3 Label in Name (A) – UI labels should match accessible names.
+       2.5.4 Motion Actuation (A) – Functionality should not rely solely on device motion.
+      2.5.5 Target Size (AAA) – Touch targets should be at least 44×44 CSS pixels.
+      2.5.6 Concurrent Input Mechanisms (AAA) – Support multiple input methods (e.g., touch + keyboard).
+
+Why Operable Matters
+	Ensures keyboard accessibility for motor-impaired users.	
+	Prevents seizures caused by flashing content.
+	Helps screen reader users navigate efficiently
+	Supports users who need extra time to interact.
+
+***********************************************************************************************************************************************************
+2.1 Keyboard Accessible (Guideline 2.1)
+
+1. Core Requirements
+
+ **All interactive elements** must work with
+	- `Tab` / `Shift+Tab` (navigation)  
+	- `Enter` / `Space` (activation)  
+	- Arrow keys (menus, sliders)  
+2.Focus Indicators must be visible
+
+3.No Keyboard traps
+
+Code Examples for keyboard accessibility
+
+1.Focusable buttons and Links
+
+Recommended: Good: Native buttons and links are keyboard accessible by default
+ button,a
+ <button>submit</button>
+<a href="#about">About</a>
+
+Not Recommened: Bad : Non interactive elements, must not pretend to be button
+ <main>
+        <div>Submit</div>
+    </main>
+
+What if there is use case i want to treat div as custom button
+soultion:
+ <!-- tabindex: operable role:perceivable -->
+    <div tabindex="0" onkeydown="if(event.key==='Enter')" role="button" onclick="submitForm()">Submit</div>
+
+Set tab Index, add onkeydown listener
+
+2.Key Navigation for Dropdown Menus
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="menu-button" aria-expanded="false" aria-haspopup="true">
+        Menu
+    </button>
+    <ul id="menu" role="menu" hidden>
+        <li role="menuitem">
+            <a href="/item1">Item1</a>
+        </li>
+        <li role="menuitem">
+            <a href="/item2">Item2</a>
+        </li>
+    </ul>
+    <script>
+        const button = document.getElementById('menu-button')
+        const menu = document.getElementById('menu')
+        //add keyboard control - naturally
+        button.addEventListener('click', () => {
+            const isOpen = menu.hidden
+            menu.hidden = !isOpen
+            button.setAttribute('aria-expanded', isOpen)
+        })
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' && menu.hidden) {
+                menu.hidden = false
+                button.setAttribute('aria-expanded', 'true')
+                menu.querySelector('a').focus()
+            }
+        })
+        menu.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                menu.hidden = true
+                button.focus()
+            }
+        })
+    </script>
+</body>
+
+</html>
+
+3.Skip Navigtion Link(ByPass blocks)
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .skip-link {
+                position: absolute;
+                left: 100px;
+            }
+
+            .skip-link:focus {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- If you are skipping some content -->
+        <a href="#maincontent" class="skip-link">
+            Skip to main
+            <header>
+                <h1>Site Header</h1>
+            </header>
+            <main id="maincontent" tabindex="-1">
+                <p>This is main Content</p>
+            </main>
+    </body>
+
+    </html>
+
+Common Pitfalls and Fixes:
+...............................................
+1.Missing tabindex for custom controls
+     ->Add tabindex=0 to make elements focusable
+2.Hidden focus styles
+     -Never remove outline without replacement
+eg:
+	button:focus {
+		outline:2px sold blue;
+       }
+3.Non Interactive elements as buttons
+     Use button or use role=button + key board handlers
+
+
+*****************************************************************************************************************************************************
+
+
+
+
 

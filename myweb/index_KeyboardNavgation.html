@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="menu-button" aria-expanded="false" aria-haspopup="true">
+        Menu
+    </button>
+    <ul id="menu" role="menu" hidden>
+        <li role="menuitem">
+            <a href="/item1">Item1</a>
+        </li>
+        <li role="menuitem">
+            <a href="/item2">Item2</a>
+        </li>
+    </ul>
+    <script>
+        const button = document.getElementById('menu-button')
+        const menu = document.getElementById('menu')
+        //add keyboard control - naturally
+        button.addEventListener('click', () => {
+            const isOpen = menu.hidden
+            menu.hidden = !isOpen
+            button.setAttribute('aria-expanded', isOpen)
+        })
+        button.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown' && menu.hidden) {
+                menu.hidden = false
+                button.setAttribute('aria-expanded', 'true')
+                menu.querySelector('a').focus()
+            }
+        })
+        menu.addEventListener('keydown', e => {
+            if (e.key === 'Escape') {
+                menu.hidden = true
+                button.focus()
+            }
+        })
+    </script>
+</body>
+
+</html>

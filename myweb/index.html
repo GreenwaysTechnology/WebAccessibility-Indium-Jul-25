@@ -1,21 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perceivable</title>
-</head>
-<body>
-    <img src="play-button.png">
-    <div style="color:gray;background-color:lightgrey;">
-        special Offer!
-    </div>
-    <p>This is test page</p>
-    <video controls>
-        <source src="demo.mp4" type="vido/mp4">
-    </video>
-    <input type="text" id="email" placeholder="Enter Email">
-    <button>Subscribe</button>
-    
-</body>
-</html>
+    <!DOCTYPE html>
+    <html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <style>
+            .skip-link {
+                position: absolute;
+                left: 100px;
+            }
+
+            .skip-link:focus {
+                position: absolute;
+                left: 10px;
+                top: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <!-- If you are skipping some content -->
+        <a href="#maincontent" class="skip-link">
+            Skip to main
+            <header>
+                <h1>Site Header</h1>
+            </header>
+            <main id="maincontent" tabindex="-1">
+                <p>This is main Content</p>
+            </main>
+    </body>
+
+    </html>
