@@ -2473,8 +2473,99 @@ eg:
 
 
 *****************************************************************************************************************************************************
+			
+								2.2 Enough Time (Guideline 2.2)
+							 (Users must have enough time to read and use content)
 
+2.2.1 Timing Adjustable (A) – Users should be able to adjust or turn off time limits.
+2.2.2 Pause, Stop, Hide (A) – Moving, blinking, or auto-updating content should have controls.
+2.2.3 No Timing (AAA) – No time limits except for real-time events (e.g., auctions).
 
+ Timing Adjustable Session Timeout:
+...............................................................
 
+import { StrictMode, useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
 
+const SessionTimeout = () => {
+    const [timeLeft, setTimeLeft] = useState(30) //2 mins
+    const [showWarning, setShowWarning] = useState(false)
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            console.log('calling')
+            setTimeLeft(prev => {
+                if (prev <= 0) {
+                    clearInterval(timer)
+                    alert("Session Expired")
+                    return 0;
+                }
+                return prev - 1
+            });
+            if (timeLeft === 30) setShowWarning(true)
+        }, 1000)
+        //clearn up code
+        return () => clearInterval(timer)
+    }, [timeLeft])
+
+    return <div aria-live="polite">
+        {showWarning && (<div>
+            <h1>Session Expires in {Math.floor(timeLeft / 60)}:{timeLeft % 60 < 10 ? '0' : ''}{timeLeft % 60}</h1>
+        </div>)}
+    </div>
+}
+
+const App = () => {
+    return <>
+        <SessionTimeout />
+    </>
+}
+
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <App />
+    </StrictMode>,
+)
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+			2.2.2 Pause, Stop, Hide (A) – Moving, blinking, or auto-updating content should have controls.
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+
+import { StrictMode, useEffect, useState } from 'react'
+import { createRoot } from 'react-dom/client'
+import './index.css'
+
+const AccessibleCarousel = () => {
+    //slide content
+    const slides = ['Slide 1', 'Slide 2', 'Slide 3', 'Slide 4', 'Slide 5']
+    const [currentIndex, setCurrentIndex] = useState(0)
+    const [isPlaying, setIsPlaying] = useState(true)
+
+    useEffect(() => {
+        if (!isPlaying) return;
+        const interval = setInterval(() => {
+            setCurrentIndex(prev => (prev + 1) % slides.length)
+        }, 1000)
+        return () => clearInterval(interval)
+    }, [isPlaying, slides.length])
+
+    return <div aria-live="off">
+        <div style={{backgroundColor:'CaptionText', height:200,color:'whitesmoke' ,textAlign:'center'}}>{slides[currentIndex]}</div>
+        <button onClick={() => {
+            setIsPlaying(!isPlaying)
+        }}>{isPlaying ? 'Pause' : 'Play'}</button>
+    </div>
+}
+
+const App = () => {
+    return <>
+        <AccessibleCarousel />
+    </>
+}
+
+createRoot(document.getElementById('root')).render(
+    <StrictMode>
+        <App />
+    </StrictMode>,
+)
 
