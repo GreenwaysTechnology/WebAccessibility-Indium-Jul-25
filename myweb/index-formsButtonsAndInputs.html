@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .visuallyhidden {
+            border: 0;
+            clip: rect(0 0 0 0);
+            height: 1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+    </style>
+</head>
+
+<body>
+    <label for="search" class="visuallyhidden">Search: </label>
+    <input type="text" name="search" id="search">
+    <button type="submit">Search</button>
+
+    <input type="text" name="search1" aria-label="Search">
+    <button type="submit">SearchFiles</button>
+
+    <input type="text" name="search" aria-labelledby="searchbutton">
+    <button id="searchbutton" type="submit">SearchVideos</button>
+
+    <input title="SearchImages" type="text" name="search">
+    <button type="submit">SearchImages</button>
+
+    <button type="submit">Submit</button>
+    <button type="button">Cancel</button>
+
+    <input type="image"  src="play-button.png" alt="play">
+
+</body>
+
+</html>

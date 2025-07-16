@@ -1,34 +1,103 @@
-    <!DOCTYPE html>
-    <html lang="en">
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bad Accessibility Examples</title>
+    <style>
+        body {
+            font-family: Comic Sans MS;
+            background-color: #F0F0F0;
+            color: #F0F0F0; /* Light text on light background */
+        }
+        .blinking {
+            animation: blink 0.5s infinite;
+        }
+        @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+        .invisible {
+            font-size: 1px;
+            color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <!-- Violating Perceivable Principle -->
+    <div>
+        <h1 style="color: yellow; background-color: white;">Welcome!</h1>
+        <img src="chart.png" alt=""> <!-- Missing alt text -->
+        <p style="color: #DDD; background-color: #EEE;">Our special offer: 50% off!</p>
+        <div class="blinking">LIMITED TIME ONLY!!!</div>
+        <audio src="annoying_jingle.mp3" autoplay loop></audio>
+    </div>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <style>
-            .skip-link {
-                position: absolute;
-                left: 100px;
-            }
+    <!-- Violating Operable Principle -->
+    <div>
+        <div style="width: 5000px;"> <!-- Horizontal scrolling required -->
+            <button onclick="alert('Button 1 clicked')">Button 1</button>
+            <button onclick="alert('Button 2 clicked')">Button 2</button>
+            <button onclick="alert('Button 3 clicked')">Button 3</button>
+            <button onclick="alert('Button 4 clicked')">Button 4</button>
+        </div>
+        <div id="trap" tabindex="0" style="outline: none;"> <!-- Keyboard trap -->
+            Try to tab away from me!
+        </div>
+        <script>
+            document.getElementById('trap').addEventListener('keydown', function(e) {
+                if (e.key === 'Tab') {
+                    e.preventDefault();
+                    this.focus();
+                }
+            });
+        </script>
+        <form>
+            <label>Timeout in 10 seconds: <input type="text" name="timeout"></label>
+            <script>
+                setTimeout(() => {
+                    document.forms[0].submit();
+                }, 10000);
+            </script>
+        </form>
+    </div>
 
-            .skip-link:focus {
-                position: absolute;
-                left: 10px;
-                top: 10px;
-            }
-        </style>
-    </head>
+    <!-- Violating Understandable Principle -->
+    <div>
+        <p lang="la">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+        <button onclick="window.location.href = '/page2'">Click here</button>
+        <form>
+            <div>Email:</div>
+            <input type="text" name="email">
+            <input type="submit" value="Submit">
+        </form>
+        <div style="position: absolute; left: -9999px;">
+            Secret hidden text for SEO purposes
+        </div>
+    </div>
 
-    <body>
-        <!-- If you are skipping some content -->
-        <a href="#maincontent" class="skip-link">
-            Skip to main
-            <header>
-                <h1>Site Header</h1>
-            </header>
-            <main id="maincontent" tabindex="-1">
-                <p>This is main Content</p>
-            </main>
-    </body>
+    <!-- Violating Robust Principle -->
+    <div>
+        <table>
+            <tr><td onclick="alert('Row 1')">Data 1</td></tr>
+            <tr><td onclick="alert('Row 2')">Data 2</td></tr>
+        </table>
+        <custom-element>This won't work in many browsers</custom-element>
+        <div role="button" tabindex="0" aria-label=""> <!-- Empty aria-label -->
+            Fake button
+        </div>
+    </div>
 
-    </html>
+    <script>
+        // Randomly change content every 5 seconds
+        setInterval(() => {
+            document.querySelector('h1').textContent = 
+                ['Sale!', 'Discount!', 'Offer!'][Math.floor(Math.random()*3)];
+        }, 5000);
+
+        // Form that submits on focus loss
+        document.querySelector('input[name="email"]').addEventListener('blur', function() {
+            this.form.submit();
+        });
+    </script>
+</body>
+</html>

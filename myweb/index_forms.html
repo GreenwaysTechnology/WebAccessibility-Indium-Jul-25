@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form>
+        <fieldset>
+            <legend>User Form</legend>
+            <section>
+                <input type="radio" name="format" id="txt" value="txt" checked>
+                <label for="txt">Text file</label>
+            </section>
+            <section>
+                <input type="radio" name="format" id="csv" value="csv">
+                <label for="csv">CSV file</label>
+            </section>
+        </fieldset>
+        <fieldset>
+            <legend>I want to receive</legend>
+            <div>
+                <input type="checkbox" name="newsletter" id="check_1">
+                <label for="check_1">The weekly newsletter</label>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Shipping Address:</legend>
+            <div>
+                <label for="shipping_name">
+                    <span class="visuallyhidden">Shipping </span>Name:
+                </label><br>
+                <input type="text" name="shipping_name" id="shipping_name">
+            </div>
+            <div>
+                <label for="shipping_street">Street:</label><br>
+                <input type="text" name="shipping_street" id="shipping_street">
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Billing Address:</legend>
+            <div>
+                <label for="billing_name">
+                    <span class="visuallyhidden">Billing </span>Name:
+                </label><br>
+                <input type="text" name="billing_name" id="billing_name">
+            </div>
+            <div>
+                <label for="billing_street">Street:</label><br>
+                <input type="text" name="billing_street" id="billing_street">
+            </div>
+        </fieldset>
+
+        <div role="group" aria-labelledby="shipping_head">
+            <div id="shipping_head">Shipping Address:</div>
+            <div>
+                <label for="shipping_name">
+                    <span class="visuallyhidden">Shipping </span>Name:
+                </label><br>
+                <input type="text" name="shipping_name" id="shipping_name">
+            </div>
+        </div>
+        <div role="group" aria-labelledby="billing_head">
+            <div id="billing_head">Billing Address:</div>
+            <div>
+                <label for="billing_name">
+                    <span class="visuallyhidden">Billing </span>Name:
+                </label><br>
+                <input type="text" name="billing_name" id="billing_name">
+            </div>
+        </div>
+
+        <select>
+            <optgroup label="8.01 Physics I: Classical Mechanics">
+                <option value="8.01.1">Lecture 01: Powers of Ten</option>
+                <option value="8.01.2">Lecture 02: 1D Kinematics</option>
+                <option value="8.01.3">Lecture 03: Vectors</option>
+            </optgroup>
+            <optgroup label="8.02 Physics II: Electricity and Magnestism">
+                <option value="8.02.1">Lecture 01: What holds our world together?</option>
+            </optgroup>
+        </select>
+
+        <label for="name">Name (required): </label>
+        <input type="text" name="name" id="name" required aria-required="true">
+
+
+
+    </form>
+</body>
+
+</html>
